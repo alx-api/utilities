@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -51,6 +51,25 @@ button.back {
   margin-bottom: 10px;
 }
 
+.search-box {
+  display: flex;
+  /*gap: 8px;*/
+  margin-bottom: 12px;
+}
+
+.search-box input {
+  font-size: 0.5rem;
+}
+
+.search-box button {
+  margin: 0 auto;
+  padding: 10px 14px;
+  background: #2051bbff;
+  color: white;
+  font-weight: 600;
+  width: 50%;
+}
+   
 /* CONTENEDOR SCROLL */
 .table-container {
   overflow-x: auto;
@@ -92,7 +111,7 @@ input {
   border-radius: 6px;
   font-size: 1rem;
   color: hsl(var(--foreground));
-  text-align: right;
+  text-align: left;
 }
 
 /* HEADER */
@@ -232,6 +251,10 @@ input {
 
 <h2>Leaderboard</h2>
 <button class="back" onclick="goBack()">⬅ Volver</button>
+<div class="search-box">
+  <input id="refInput" placeholder="Referral code..." />
+  <button onclick="loadByRef()">Load</button>
+</div>
 <button onclick="copyPlayers()">Copiar jugadores</button>
 <div class="table-container">
     <table id="metadata">
@@ -255,13 +278,20 @@ function goBack() {
   window.history.back();
 }
 
-function toggleSection(header) {
-  const content = header.nextElementSibling;
+function loadByRef() {
+ const ref = document.getElementById("refInput").value.trim();
 
-  content.classList.toggle("collapsed");
-  header.classList.toggle("active");
+ if (!ref) return;
+
+ // actualiza URL sin recargar completamente
+ const url = new URL(window.location);
+ url.searchParams.set("ref", ref);
+ window.history.pushState({}, "", url);
+
+ // dispara flujo
+ initLeaderboard(ref);
 }
-
+ 
 function copyPlayers() {
   const rows = document.querySelectorAll("#summary tbody tr");
   const btn = document.querySelector("button[onclick='copyPlayers()']");
@@ -296,10 +326,10 @@ function formatDate(dateStr) {
   });
 }
 
-async function fetchMetaDataFromAPI() {
-  const params = new URLSearchParams(window.location.search);
+async function fetchMetaDataFromAPI(ref) {
+
   try {
-    const response = await fetch(`https://admin.yeeterboards.com/api/leaderboards/${params.get("aff")}`, {
+    const response = await fetch(`https://admin.yeeterboards.com/api/leaderboards/${ref}`, {
       headers: {
         "origin": "https://yeeterboards.com",
         "referer": "https://yeeterboards.com/",
@@ -389,10 +419,10 @@ function loadInitialData(tableId, data, prizes) {
     tr.innerHTML = `
       <td class="pos">${index + 1}</td>
       <td class="creator">${row.jugador}</td>
-      <td><input disabled type="text" value="${row.puntos.toLocaleString(undefined, {
+      <td class="points">${row.puntos.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
-            })}"></td>
+            })}</td>
       <td class="prize">$${prize.toLocaleString()}</td>
     `;
 
@@ -400,9 +430,22 @@ function loadInitialData(tableId, data, prizes) {
   });
 }
 
-(async () => {
+async function initLeaderboard(refParam) {
+  let ref = refParam;
   let apiKey, inidate,enddate,prizes;
-  const apiMetaData = await fetchMetaDataFromAPI();
+
+  if (!ref) {
+    const params = new URLSearchParams(window.location.search);
+    ref = params.get("ref");
+  }
+
+  document.getElementById("refInput").value = ref;
+
+  if (!ref) {
+    console.warn("No hay referral code");
+    return;
+  }
+  const apiMetaData = await fetchMetaDataFromAPI(ref);
 
   if (apiMetaData) {
     apiKey = apiMetaData.yeet_api_key;
@@ -423,8 +466,17 @@ function loadInitialData(tableId, data, prizes) {
   if (apiData && apiData.length) {
     loadInitialData("summary", apiData, prizes);
   }
+}
 
-})();
+document.addEventListener("DOMContentLoaded", () => {
+  initLeaderboard();
+});
+
+document.getElementById("refInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    loadByRef();
+  }
+});
 
 sessionStorage.removeItem("yeet_api_key");
 sessionStorage.removeItem("yeet_api_inidate");
