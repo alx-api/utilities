@@ -2,32 +2,100 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Leaderboard</title>
+  <title>Utilities Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    ul {
-      list-style: none;
-      padding: 0;
+    * {
+      box-sizing: border-box;
     }
-    
-    li {
-      margin: 10px 0;
-    }
-    
-    a {
-      display: block;
-      padding: 12px;
-      background: #111827;
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Arial;
+      background: #0f172a;
       color: white;
-      border-radius: 8px;
+    }
+
+    /* HEADER */
+    .header {
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* CARD */
+    .card {
+      background: #1e293b;
+      border-radius: 14px;
+      padding: 20px;
       text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    /* ICON */
+    .icon {
+      font-size: 28px;
+    }
+
+    /* TITLE */
+    .title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* DESCRIPTION */
+    .desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    /* MOBILE */
+    @media (max-width: 480px) {
+      .header {
+        font-size: 1.3rem;
+      }
+
+      .card {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container"><h2>Menú</h2>
-    <ul>
-      <li><a href="leaderboard.html">Leaderboard</a></li>
-    </ul>
+
+  <div class="header">🚀 Dashboard</div>
+
+  <div class="grid">
+
+    <a class="card" href="leaderboard.html">
+      <div class="icon">📊</div>
+      <div class="title">Leaderboard</div>
+      <div class="desc">Players & prize pool.</div>
+    </a>
+
   </div>
+
 </body>
 </html>
