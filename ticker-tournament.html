@@ -1,0 +1,437 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Standings Ticker</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:transparent;
+    overflow:hidden;
+}
+
+.ticker-wrapper{
+    width:100%;
+    padding:12px;
+}
+
+.ticker{
+    display:flex;
+    gap:5px;
+    width:100%;
+}
+
+.card{
+
+    height:72px;
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:
+        64px
+        1fr
+        82px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24,24,24,.96),
+            rgba(10,10,10,.94)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+    color:white;
+
+    opacity:0;
+    transform:translateY(10px);
+
+    transition:
+        opacity .4s ease,
+        transform .4s ease;
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+/*
+==================================================
+RANK SECTION
+==================================================
+*/
+
+.rank-section{
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.02)
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:26px;
+    font-weight:900;
+
+    letter-spacing:-1px;
+}
+
+/*
+==================================================
+TEAM SECTION
+==================================================
+*/
+
+.team-section{
+
+    padding:8px 10px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.team-name{
+
+    font-size:20px;
+    font-weight:800;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    margin-bottom:2px;
+}
+
+.players{
+
+    font-size:12px;
+    opacity:.75;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/*
+==================================================
+STATS SECTION
+==================================================
+*/
+
+.stats-section{
+
+    padding:8px 10px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-end;
+
+    gap:1px;
+}
+
+.stat-row{
+    width:100%;
+}
+
+.stat-label{
+
+    font-size:10px;
+
+    opacity:.6;
+
+    text-transform:uppercase;
+
+    margin-bottom:1px;
+
+    text-align:right;
+}
+
+.stat-value{
+
+    font-size:16px;
+    font-weight:800;
+
+    line-height:1;
+
+    text-align:right;
+}
+
+</style>
+</head>
+<body>
+
+<div class="ticker-wrapper">
+
+    <div
+        class="ticker"
+        id="ticker">
+    </div>
+
+</div>
+
+<script>
+
+/*
+==================================================
+CONFIG
+==================================================
+*/
+
+const SHEET_ID = "1v-nNF4QplAZPf7crDaHyCY3-jG0T7QU8";
+const SHEET_NAME = "RAW";
+
+/*
+==================================================
+GOOGLE SHEETS JSON ENDPOINT
+==================================================
+*/
+
+const API_URL =
+`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${SHEET_NAME}&tqx=out:json`;
+
+/*
+==================================================
+STATE
+==================================================
+*/
+
+const ticker =
+    document.getElementById("ticker");
+
+let standings = [];
+let currentIndex = 0;
+
+/*
+==================================================
+LOAD DATA
+==================================================
+*/
+
+async function loadStandings(){
+
+    try{
+
+        const response =
+            await fetch(API_URL);
+
+        const text = await response.text();
+
+        const json = JSON.parse(
+            text.substring(47).slice(0, -2)
+        );
+
+        const rows = json.table.rows;
+
+        const leaderboard = rows
+                .map(row => ({
+
+                    slot: row.c[1]?.v,
+                    team: row.c[2]?.v,
+                    players: row.c[3]?.v,
+                    points: row.c[4]?.v || 0,
+                    kills: row.c[5]?.v || 0
+
+                }))
+
+        // quitar filas vacías/basura
+        .filter(team =>
+            team.team &&
+            team.team.trim() !== ""
+        )
+
+        // ordenar por rank
+        //.sort((a,b) => a.rank - b.rank)
+        .sort((a,b) => b.points - a.points)
+
+        .map((team, index) => ({
+            ...team,
+            rank: index + 1
+        }))
+
+        // sólo top 16
+        .slice(0,16);
+
+        /*
+        Espera columnas como:
+
+        rank
+        team
+        players
+        points
+        kills
+
+        */
+
+        standings = leaderboard;
+
+        renderCards();
+
+    }catch(error){
+
+        console.error(
+            "Error loading standings:",
+            error
+        );
+    }
+}
+
+/*
+==================================================
+RENDER
+==================================================
+*/
+
+function renderCards(){
+
+    ticker.innerHTML = "";
+
+    const visible = [];
+
+    for(let i = 0; i < 4; i++){
+
+        const item =
+            standings[
+                (currentIndex + i)
+                % standings.length
+            ];
+
+        if(item){
+            visible.push(item);
+        }
+    }
+
+    visible.forEach((team, idx)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "card";
+
+        card.innerHTML = `
+
+
+            <div class="rank-section">
+                #${team.rank}
+            </div>
+
+            <div class="team-section">
+
+                <div class="team-name">
+                    ${team.team}
+                </div>
+
+                <div class="players">
+                    ${team.players}
+                </div>
+
+            </div>
+
+            <div class="stats-section">
+
+                <div class="stat-row">
+
+                    <div class="stat-label">
+                        Points
+                    </div>
+                    <div class="stat-value">
+                        ${Number(team.points).toFixed(2)}
+                    </div>
+
+                </div>
+
+                <div class="stat-row">
+
+                    <div class="stat-label">
+                        Kills
+                    </div>
+
+                    <div class="stat-value">
+                        ${team.kills}
+                    </div>
+
+                </div>
+            </div>
+
+        `;
+
+        ticker.appendChild(card);
+
+        setTimeout(()=>{
+
+            card.classList.add("show");
+
+        }, idx * 120);
+
+    });
+
+    currentIndex =
+        (currentIndex + 4)
+        % standings.length;
+}
+
+/*
+==================================================
+AUTO ROTATION
+==================================================
+*/
+
+setInterval(()=>{
+
+    renderCards();
+
+}, 30000);
+
+/*
+==================================================
+AUTO REFRESH SHEET
+==================================================
+*/
+
+setInterval(()=>{
+
+    loadStandings();
+
+}, 7000);
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadStandings();
+
+</script>
+
+</body>
+</html>

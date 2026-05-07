@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Tournament Leaderboard</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:transparent;
+    font-family:Arial, Helvetica, sans-serif;
+    color:white;
+    overflow:hidden;
+}
+
+.wrapper{
+    width:100%;
+    padding:20px;
+}
+
+.board{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.column{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:70px 1fr 120px;
+
+    column-gap:30px;
+
+    align-items:center;
+
+    padding:0 18px 0 0;
+
+    background:rgba(20,20,20,0.82);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(8px);
+
+    transition:0.2s;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.row:hover{
+    transform:scale(1.01);
+}
+
+.qualified{
+
+    border:1px solid rgba(76,175,80,0.35);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(46,125,50,0.32) 0%,
+            rgba(20,20,20,0.88) 24%
+        );
+
+    box-shadow:
+        0 0 18px rgba(76,175,80,0.10);
+}
+
+.qualified .rank-section{
+
+
+
+    border-right:
+        1px solid rgba(255,255,255,0.12);
+}
+
+.rank{
+    font-size:28px;
+    font-weight:900;
+    color:white;
+}
+
+.rank-section{
+
+    align-self:stretch;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:90px;
+
+    padding:0 18px;
+
+    border-right:1px solid rgba(255,255,255,0.08);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.02)
+        );
+}
+
+.player{
+    font-size:22px;
+    font-weight:700;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.points{
+    text-align:right;
+
+    font-size:24px;
+    font-weight:900;
+
+    color:#ffd54a;
+}
+
+.stats{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
+
+.stats{
+    padding:14px 0;
+}
+
+.points{
+    text-align:right;
+    font-size:26px;
+    font-weight:900;
+    color:#ffd54a;
+    line-height:1;
+}
+
+.kills{
+    margin-top:4px;
+
+    font-size:12px;
+    font-weight:700;
+
+    color:rgba(255,255,255,0.7);
+
+    letter-spacing:1px;
+}
+
+.team-info{
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.players{
+
+    margin-top:4px;
+
+    font-size:12px;
+
+    color:rgba(255,255,255,0.62);
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.title{
+
+    margin-bottom:18px;
+
+    font-size:54px;
+
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    color:white;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 18px rgba(255,255,255,0.12);
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="title">
+        STANDINGS
+    </div>
+    <div class="board">
+
+        <div class="column" id="left-column"></div>
+
+        <div class="column" id="right-column"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const SHEET_ID = "1v-nNF4QplAZPf7crDaHyCY3-jG0T7QU8";
+
+async function loadLeaderboard() {
+
+    const url =
+        `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=RAW&tqx=out:json`;
+
+    const response = await fetch(url);
+
+    const text = await response.text();
+
+    const json = JSON.parse(
+        text.substring(47).slice(0, -2)
+    );
+
+    const rows = json.table.rows;
+
+    const leaderboard = rows
+        .map(row => ({
+
+            rank: row.c[1]?.v,
+            team: row.c[2]?.v,
+            players: row.c[3]?.v,
+            points: row.c[4]?.v,
+            kills: row.c[5]?.v
+
+        }))
+
+        // quitar filas vacías/basura
+        .filter(team =>
+            team.rank &&
+            team.team &&
+            team.team.trim() !== ""
+        )
+
+        // ordenar por rank
+        //.sort((a,b) => a.rank - b.rank)
+        .sort((a,b) => b.points - a.points)
+
+        // sólo top 16
+        .slice(0,16);
+
+    renderLeaderboard(leaderboard);
+}
+
+function createRow(team, index){
+
+    const qualified = index < 8;
+
+    return `
+        <div class="row ${qualified ? 'qualified' : ''}">
+
+            <div class="rank-section">
+                <div class="rank">
+                    #${index + 1}
+                </div>
+            </div>
+
+            <div class="team-info">
+
+                <div class="player">
+                    ${team.team}
+                </div>
+
+                <div class="players">
+                    ${team.players || ""}
+                </div>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="points">
+                    ${Number(team.points).toFixed(2)}
+                </div>
+
+                <div class="kills">
+                    ${team.kills} KILLS
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+function renderLeaderboard(data){
+
+    const leftColumn = document.getElementById("left-column");
+    const rightColumn = document.getElementById("right-column");
+
+    const leftSide = data.slice(0,8);
+
+    const rightSide = data.slice(8,16);
+
+    leftColumn.innerHTML =
+        leftSide.map((team, index) => createRow(team, index)).join("");
+
+    rightColumn.innerHTML =
+        rightSide.map((team, index) => createRow(team, index + 8)).join("");
+}
+
+// primera carga
+loadLeaderboard();
+
+// refresh automático cada 60 segundos
+setInterval(loadLeaderboard, 60000);
+
+</script>
+
+</body>
+</html>
