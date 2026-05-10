@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
@@ -220,7 +220,7 @@ body{
 </div>
 
 <script>
-
+let map_count=0;
 const teamNames = [
     {"id": "e5d767f3-9988-4c45-a583-8303cbf7d0e6",
     "name": "RVX"},
@@ -263,19 +263,20 @@ const teamMap = Object.fromEntries(
 async function loadLeaderboard() {
 
     const url =
-        "https://cod-final-livestandings.ialexk.workers.dev";
+        "https://cod-livestandings-agg.ialexk.workers.dev";
 
     const response = await fetch(url);
 
     const json = await response.json();
 
+    map_count = json.map_count
 
     const leaderboard = json.standings
         .map((team, index) => ({
 
             rank: team.rank,
 
-            maps: 2,
+            maps: map_count,
 
             team: teamMap[team.team_name] || team.players[0].name,
 
@@ -343,6 +344,9 @@ function renderLeaderboard(data){
 
     const leftColumn = document.getElementById("left-column");
     const rightColumn = document.getElementById("right-column");
+
+    document.querySelector(".title").innerHTML =
+    `STANDINGS • MAP ${map_count}`;
 
     const leftSide = data.slice(0,8);
 
