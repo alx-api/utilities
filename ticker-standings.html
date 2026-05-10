@@ -268,7 +268,8 @@ async function loadStandings(){
 
         const json = await response.json();
 
-
+        const firstLoad = standings.length === 0;
+      
         const leaderboard = json.standings
             .map((team, index) => ({
 
@@ -294,7 +295,10 @@ async function loadStandings(){
 
             standings = leaderboard;
 
-            renderCards();
+            if(firstLoad){
+                renderCards();
+            }
+
 
     }catch(error){
 
@@ -409,7 +413,7 @@ setInterval(()=>{
 
     renderCards();
 
-}, 30000);
+}, 8000);
 
 /*
 ==================================================
@@ -421,7 +425,7 @@ setInterval(()=>{
 
     loadStandings();
 
-}, 7000);
+}, 16000);
 
 /*
 ==================================================
