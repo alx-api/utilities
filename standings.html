@@ -263,7 +263,7 @@ const teamMap = Object.fromEntries(
 async function loadLeaderboard() {
 
     const url =
-        "https://cod-leaderboard-proxy.ialexk.workers.dev";
+        "https://cod-final-livestandings.ialexk.workers.dev";
 
     const response = await fetch(url);
 
@@ -275,7 +275,7 @@ async function loadLeaderboard() {
 
             rank: team.rank,
 
-            maps: team.placements.length,
+            maps: 2,
 
             team: teamMap[team.team_name] || team.players[0].name,
 
@@ -330,11 +330,9 @@ function createRow(team, index){
                 <div class="kills">
                     ${team.kills} KILLS
                 </div>
-
                 <div class="maps">
                     ${team.maps} maps
                 </div>
-
             </div>
 
         </div>
