@@ -46,16 +46,16 @@ async function loadLeaderboard() {
 
     const json = await response.json();
 
-    map_count = json.map_count
+    map_count = json.standings[0].placements
+                .filter(v => Number(v) !== 0)
+                .length
 
     const leaderboard = json.standings
         .map((team, index) => ({
 
             rank: team.rank,
 
-            maps: team.placements
-                .filter(v => Number(v) !== 0)
-                .length,
+            maps: map_count,
 
             team: team.team_name,
 
