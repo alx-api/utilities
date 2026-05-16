@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Tournament Leaderboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="./css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="title">
+        PLACEMENTS
+    </div>
+
+    <div class="board">
+
+        <div class="column" id="left-column"></div>
+
+        <div class="column" id="right-column"></div>
+
+    </div>
+
+</div>
+
+<script src="./js/leaderboard.js"></script>
+
+<script>
+let map_count=0;
+
+async function loadLeaderboard() {
+
+    const url =
+        "https://json-live-map.ialexk.workers.dev/";
+
+    const response = await fetch(url);
+
+    const json = await response.json();
+
+    map_count = json.map_number;
+
+    const leaderboard = json.teams
+        .map((team) => ({
+
+            rank: team.placement,
+
+            maps: map_count,
+
+            team: team.team_name,
+
+            points: team.team_score,
+
+            kills: team.players?.reduce((total, player) => total + player.kills, 0),
+
+            players: team.players
+                ?.map(player => `${player.name} - ${player.kills} kills`)
+                .join(" • ")
+
+        }))
+
+        .sort((a,b) => a.rank - b.rank)
+
+        .slice(0,16);
+
+    renderLeaderboard(leaderboard);
+}
+
+loadLeaderboard();
+
+setInterval(loadLeaderboard, 15000);
+
+</script>
+
+</body>
+</html>
