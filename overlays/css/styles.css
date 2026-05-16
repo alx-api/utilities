@@ -48,8 +48,9 @@ body{
 
     color:var(--text-main);
 
-    overflow:hidden;
-
+    overflow-y:auto;
+    overflow-x:hidden;
+    
     position:relative;
 }
 
