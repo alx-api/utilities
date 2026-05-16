@@ -51,6 +51,8 @@ async function loadLeaderboard() {
 
             maps: map_count,
 
+            placement: placement,
+
             team: team.team_name,
 
             points: team.team_score,
@@ -63,7 +65,13 @@ async function loadLeaderboard() {
 
         }))
 
-        .sort((a,b) => a.team_score - b.team_score)
+        .sort((a, b) => {
+            if (a.placement !== b.placement) {
+                return a.placement - b.placement;
+            }
+
+            return b.points - a.points;
+        })
 
         .slice(0,16);
     
