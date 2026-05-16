@@ -9,208 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="./css/styles-ticker.css" rel="stylesheet">
 
-<style>
-
-:root{
-    --gold:#f6c453;
-    --purple:#8d4dff;
-
-    --text-main:#f4f6fb;
-    --text-soft:rgba(255,255,255,.72);
-    --text-dim:rgba(255,255,255,.45);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:transparent;
-
-    overflow:hidden;
-
-    font-family:'Oxanium', sans-serif;
-}
-
-.ticker-wrapper{
-    width:100%;
-    padding:8px 12px;
-}
-
-.ticker{
-    display:flex;
-    gap:8px;
-    width:100%;
-}
-
-.card{
-    position:relative;
-
-    height:64px;
-
-    flex:1;
-
-    display:grid;
-
-    grid-template-columns:
-    54px
-    minmax(0,1fr)
-    76px;
-
-    overflow:hidden;
-
-    background:
-    linear-gradient(
-        90deg,
-        rgba(18,24,38,.96),
-        rgba(10,13,20,.96)
-    );
-
-    box-shadow:
-    0 6px 24px rgba(0,0,0,.42),
-    inset 0 1px 0 rgba(255,255,255,.03);
-
-    color:var(--text-main);
-
-    opacity:0;
-
-    transform:translateY(10px);
-
-    transition:
-    opacity .4s ease,
-    transform .4s ease;
-}
-
-.card::before{
-    content:"";
-
-    position:absolute;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:2px;
-
-    background:
-    linear-gradient(
-        90deg,
-        var(--purple),
-        var(--gold)
-    );
-
-    opacity:.9;
-}
-
-.card.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.rank-section{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-    linear-gradient(
-        180deg,
-        rgba(141,77,255,.18),
-        rgba(141,77,255,.04)
-    );
-
-    font-size:24px;
-    font-weight:900;
-
-    letter-spacing:-1px;
-
-    text-shadow:
-    0 0 14px rgba(141,77,255,.3);
-}
-
-.team-section{
-    min-width:0;
-
-    padding:7px 10px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    overflow:hidden;
-}
-
-.team-name{
-    font-size:18px;
-    font-weight:800;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.players{
-    margin-top:2px;
-
-    font-size:10px;
-
-    color:var(--text-dim);
-
-    text-transform:uppercase;
-
-    letter-spacing:.8px;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.stats-section{
-    padding:7px 10px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-end;
-
-    gap:2px;
-}
-
-.stat-row{
-    width:100%;
-}
-
-.stat-label{
-    font-size:9px;
-
-    color:var(--text-dim);
-
-    text-transform:uppercase;
-
-    letter-spacing:1px;
-
-    text-align:right;
-}
-
-.stat-value{
-    font-size:16px;
-    font-weight:900;
-
-    line-height:1;
-
-    text-align:right;
-}
-
-.stat-row:first-child .stat-value{
-    color:var(--gold);
-
-    text-shadow:
-    0 0 12px rgba(246,196,83,.22);
-}
-
-</style>
 </head>
 <body>
 
@@ -223,12 +23,15 @@ body{
 
 </div>
 
+<script src="./js/ticker.js"></script>
+
 <script>
 const ticker =
     document.getElementById("ticker");
 
 let standings = [];
 let currentIndex = 0;
+let map_count=0;
 
 async function loadStandings(){
 
@@ -241,12 +44,16 @@ async function loadStandings(){
 
         const json = await response.json();
 
+        map_count = json.map_count;
+
         const firstLoad = standings.length === 0;
 
         const leaderboard = json.standings
             .map((team) => ({
 
                 rank: team.rank,
+
+                maps: map_count,
 
                 team: team.team_name,
 
@@ -277,95 +84,6 @@ async function loadStandings(){
             error
         );
     }
-}
-
-function renderCards(){
-
-    ticker.innerHTML = "";
-
-    const visible = [];
-
-    for(let i = 0; i < 4; i++){
-
-        const item =
-            standings[
-                (currentIndex + i)
-                % standings.length
-            ];
-
-        if(item){
-            visible.push(item);
-        }
-    }
-
-    visible.forEach((team, idx)=>{
-
-        const card =
-            document.createElement("div");
-
-        card.className = "card";
-
-        card.innerHTML = `
-
-            <div class="rank-section">
-                #${team.rank}
-            </div>
-
-            <div class="team-section">
-
-                <div class="team-name">
-                    ${team.team}
-                </div>
-
-                <div class="players">
-                    ${team.players}
-                </div>
-
-            </div>
-
-            <div class="stats-section">
-
-                <div class="stat-row">
-
-                    <div class="stat-label">
-                        Points
-                    </div>
-
-                    <div class="stat-value">
-                        ${Number(team.points).toFixed(2)}
-                    </div>
-
-                </div>
-
-                <div class="stat-row">
-
-                    <div class="stat-label">
-                        Kills
-                    </div>
-
-                    <div class="stat-value">
-                        ${team.kills}
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-        ticker.appendChild(card);
-
-        setTimeout(()=>{
-
-            card.classList.add("show");
-
-        }, idx * 120);
-
-    });
-
-    currentIndex =
-        (currentIndex + 4)
-        % standings.length;
 }
 
 setInterval(()=>{
