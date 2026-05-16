@@ -1,0 +1,442 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Standings Ticker</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:transparent;
+    overflow:hidden;
+}
+
+.ticker-wrapper{
+    width:100%;
+    padding:12px;
+}
+
+.ticker{
+    display:flex;
+    gap:5px;
+    width:100%;
+}
+
+.card{
+
+    height:72px;
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:
+        64px
+        1fr
+        82px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24,24,24,.96),
+            rgba(10,10,10,.94)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+
+    overflow:hidden;
+
+    color:white;
+
+    opacity:0;
+    transform:translateY(10px);
+
+    transition:
+        opacity .4s ease,
+        transform .4s ease;
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+/*
+==================================================
+RANK SECTION
+==================================================
+*/
+
+.rank-section{
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.02)
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:26px;
+    font-weight:900;
+
+    letter-spacing:-1px;
+}
+
+/*
+==================================================
+TEAM SECTION
+==================================================
+*/
+
+.team-section{
+
+    padding:8px 10px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.team-name{
+
+    font-size:20px;
+    font-weight:800;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    margin-bottom:2px;
+}
+
+.players{
+
+    font-size:12px;
+    opacity:.75;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/*
+==================================================
+STATS SECTION
+==================================================
+*/
+
+.stats-section{
+
+    padding:8px 10px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-end;
+
+    gap:1px;
+}
+
+.stat-row{
+    width:100%;
+}
+
+.stat-label{
+
+    font-size:10px;
+
+    opacity:.6;
+
+    text-transform:uppercase;
+
+    margin-bottom:1px;
+
+    text-align:right;
+}
+
+.stat-value{
+
+    font-size:16px;
+    font-weight:800;
+
+    line-height:1;
+
+    text-align:right;
+}
+
+</style>
+</head>
+<body>
+
+<div class="ticker-wrapper">
+
+    <div
+        class="ticker"
+        id="ticker">
+    </div>
+
+</div>
+
+<script>
+const teamNames = [
+    {"id": "e5d767f3-9988-4c45-a583-8303cbf7d0e6",
+    "name": "RVX"},
+    {"id": "2cd6309a-a559-4be3-8bde-fab88c168dc5",
+    "name": "Castillo"},
+    {"id": "0ec2d333-24f2-4a3e-9bc1-40c3a50c7f50",
+    "name": "Aldosmn"},
+    {"id": "741bd254-dacd-447f-8b07-daae1c844999",
+    "name": "Woodzzii"},
+    {"id": "da3d32f0-2745-47f7-8663-af188435d273",
+    "name": "MirreyTv"},
+    {"id": "0cc1a27a-946c-4589-bed5-e8e35f264994",
+    "name": "Sirvega"},
+    {"id": "876406fd-a779-4fb1-830a-fc23207d47fb",
+    "name": "iBGod"},
+    {"id": "40a60670-5bc0-4ff7-ad71-e81d7b2d48e8",
+    "name": "Smoky"},
+    {"id": "d8dd7adf-254b-4d66-a3da-b6a2c111cd13",
+    "name": "iCuevas"},
+    {"id": "b6d94cec-6d88-42c1-b011-e90c2e0b32d7",
+    "name": "Tekillerr"},
+    {"id": "f00e580e-0449-4908-9b9f-e4ddbd4b56d9",
+    "name": "BSK Spidys"},
+    {"id": "d13a2712-325a-411a-a3b8-30ff3701e486",
+    "name": "Clamp"},
+    {"id": "5c4f1945-5860-44ce-a20f-4972477a2e3f",
+    "name": "1x-1x"},
+    {"id": "98b27202-2e33-4a38-8b4f-f61b307e5d6a",
+    "name": "Kryziito"},
+    {"id": "59ab5b06-9bab-4a0f-8bfd-2088b32281c5",
+    "name": "CherryVvs"},
+    {"id": "0cbbd359-7516-4768-b303-82a10d2fc1d2",
+    "name": "Jooy_booy"}
+    ];
+
+const teamMap = Object.fromEntries(
+    teamNames.map(team => [team.id, team.name])
+);
+
+/*
+==================================================
+STATE
+==================================================
+*/
+
+const ticker =
+    document.getElementById("ticker");
+
+let standings = [];
+let currentIndex = 0;
+
+/*
+==================================================
+LOAD DATA
+==================================================
+*/
+
+async function loadStandings(){
+
+    const url =
+    "https://json-live-merge.ialexk.workers.dev/";
+
+    try{
+
+        const response = await fetch(url);
+
+        const json = await response.json();
+
+        const firstLoad = standings.length === 0;
+
+
+        const leaderboard = json.standings
+            .map((team, index) => ({
+
+                rank: team.rank,
+
+                maps: team.placements?.length || 0,
+
+                team: team.team_name,
+
+                points: team.final_score,
+
+                kills: team.total_kills,
+
+                players: team.players   
+                    ?.map(player => player.name)
+                    .join(" • ")
+
+            }))
+
+            .sort((a,b) => a.rank - b.rank)
+
+            .slice(0,16);
+
+            standings = leaderboard;
+
+            if(firstLoad){
+                renderCards();
+            }
+
+    }catch(error){
+
+        console.error(
+            "Error loading standings:",
+            error
+        );
+    }
+}
+
+/*
+==================================================
+RENDER
+==================================================
+*/
+
+function renderCards(){
+
+    ticker.innerHTML = "";
+
+    const visible = [];
+
+    for(let i = 0; i < 4; i++){
+
+        const item =
+            standings[
+                (currentIndex + i)
+                % standings.length
+            ];
+
+        if(item){
+            visible.push(item);
+        }
+    }
+
+    visible.forEach((team, idx)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "card";
+
+        card.innerHTML = `
+
+
+            <div class="rank-section">
+                ${team.rank}
+            </div>
+
+            <div class="team-section">
+
+                <div class="team-name">
+                    ${team.team}
+                </div>
+
+                <div class="players">
+                    ${team.players}
+                </div>
+
+            </div>
+
+            <div class="stats-section">
+
+                <div class="stat-row">
+
+                    <div class="stat-label">
+                        Points
+                    </div>
+                    <div class="stat-value">
+                        ${Number(team.points).toFixed(2)}
+                    </div>
+
+                </div>
+
+                <div class="stat-row">
+
+                    <div class="stat-label">
+                        Kills
+                    </div>
+
+                    <div class="stat-value">
+                        ${team.kills}
+                    </div>
+
+                </div>
+            </div>
+
+        `;
+
+        ticker.appendChild(card);
+
+        setTimeout(()=>{
+
+            card.classList.add("show");
+
+        }, idx * 120);
+
+    });
+
+    currentIndex =
+        (currentIndex + 4)
+        % standings.length;
+}
+
+/*
+==================================================
+AUTO ROTATION
+==================================================
+*/
+
+setInterval(()=>{
+
+    renderCards();
+
+}, 8000);
+
+/*
+==================================================
+AUTO REFRESH SHEET
+==================================================
+*/
+
+setInterval(()=>{
+
+    loadStandings();
+
+}, 16000);
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadStandings();
+
+</script>
+
+</body>
+</html>
