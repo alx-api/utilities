@@ -97,8 +97,13 @@ body{
 
 .rank-section{
     display:flex;
+    flex-direction:column;
+    
     align-items:center;
     justify-content:center;
+    align-items:flex-end;
+
+    overflow:hidden;
 
     background:
     linear-gradient(
