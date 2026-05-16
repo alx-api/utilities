@@ -49,8 +49,6 @@ async function loadLeaderboard() {
     const leaderboard = json.teams
         .map((team) => ({
 
-            rank: team.placement,
-
             maps: map_count,
 
             team: team.team_name,
@@ -65,9 +63,13 @@ async function loadLeaderboard() {
 
         }))
 
-        .sort((a,b) => a.rank - b.rank)
+        .sort((a,b) => a.team_score - b.team_score)
 
         .slice(0,16);
+    
+    leaderboard.forEach((team, index) => {
+        team.rank = index + 1;
+      });
 
     renderLeaderboard(leaderboard);
 }
