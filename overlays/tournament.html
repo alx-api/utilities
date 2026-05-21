@@ -1,0 +1,86 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Tournament Leaderboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="./css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="title">
+        STANDINGS
+    </div>
+    <div class="board">
+
+        <div class="column" id="left-column"></div>
+
+        <div class="column" id="right-column"></div>
+
+    </div>
+
+</div>
+
+<script src="./js/leaderboard.js"></script>
+
+<script>
+let map_count=0;
+
+const params = new URLSearchParams(window.location.search);
+const SHEET_ID = params.get("sheetid");
+
+async function loadLeaderboard() {
+
+    const url =
+        `https://xls-to-json.ialexk.workers.dev/?sheet=${SHEET_ID}&tab=DATOS`;
+
+    const response = await fetch(url);
+
+    const json = await response.json();
+
+    map_count = json.standings[0].placements
+                .filter(v => Number(v) !== 0)
+                .length
+
+    const leaderboard = json.standings
+        .map((team, index) => ({
+
+            rank: team.rank,
+
+            maps: map_count,
+
+            team: team.team_name,
+
+            points: team.final_score,
+
+            kills: team.total_kills,
+
+            players: team.players   
+                ?.map(player => player.name)
+                .join(" • ")
+
+        }))
+
+        .sort((a,b) => a.rank - b.rank)
+
+        .slice(0,16);
+
+    renderLeaderboard(leaderboard);
+}
+
+loadLeaderboard();
+
+setInterval(loadLeaderboard, 15000);
+
+</script>
+
+</body>
+</html>
