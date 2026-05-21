@@ -1,0 +1,109 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Standings Ticker</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="./css/styles-ticker.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="ticker-wrapper">
+
+    <div
+        class="ticker"
+        id="ticker">
+    </div>
+
+</div>
+
+<script src="./js/ticker.js"></script>
+
+<script>
+const ticker =
+    document.getElementById("ticker");
+
+let standings = [];
+let currentIndex = 0;
+let map_count=0;
+
+const params = new URLSearchParams(window.location.search);
+const SHEET_ID = params.get("sheetid");
+
+async function loadStandings(){
+
+    const url =
+        `https://xls-to-json.ialexk.workers.dev/?sheet=${SHEET_ID}&tab=DATOS`;
+
+    try{
+
+        const response = await fetch(url);
+
+        const json = await response.json();
+
+        map_count = json.map_count;
+
+        const firstLoad = standings.length === 0;
+
+        const leaderboard = json.standings
+            .map((team, index) => ({
+
+                rank: team.rank,
+
+                maps: team.placements.filter(v=> Number(v) !== 0).length,
+
+                team: team.team_name,
+
+                points: team.final_score,
+
+                kills: team.total_kills,
+
+                players: team.players   
+                    ?.map(player => player.name)
+                    .join(" • ")
+
+            }))
+
+            .sort((a,b) => a.rank - b.rank)
+
+            .slice(0,16);
+
+            standings = leaderboard;
+
+            if(firstLoad){
+                renderCards();
+            }
+
+    }catch(error){
+
+        console.error(
+            "Error loading standings:",
+            error
+        );
+    }
+}
+
+setInterval(()=>{
+
+    renderCards();
+
+}, 8000);
+
+setInterval(()=>{
+
+    loadStandings();
+
+}, 16000);
+
+loadStandings();
+
+</script>
+
+</body>
+</html>
