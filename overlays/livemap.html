@@ -60,7 +60,7 @@ async function loadLeaderboard() {
             kills: team.players?.reduce((total, player) => total + player.kills, 0),
 
             players: team.players
-                ?.map(player => `${player.name} - ${player.kills} kills`)
+                ?.map(player => `${player.name} - ${player.kills} ☠️`)
                 .join(" • ")
 
         }))
