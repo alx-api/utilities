@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mirrey Status</title>
+</head>
+<body>
+<pre id="output">Cargando...</pre>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const SHEET_ID = params.get("sheetid");
+const TAB = params.get("tab") || "DATOS";
+const SEARCH = (params.get("q") || "mirrey").toLowerCase();
+
+async function loadStatus() {
+  try {
+    const url =
+      `https://xls-to-json.ialexk.workers.dev/?sheet=${SHEET_ID}&tab=${TAB}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const foundTeam = data.standings?.find(team => {
+      const teamMatch =
+        team.team_name?.toLowerCase().includes(SEARCH);
+
+      const playerMatch =
+        team.players?.some(player =>
+          player.name?.toLowerCase().includes(SEARCH)
+        );
+
+      return teamMatch || playerMatch;
+    });
+
+    if (!foundTeam) {
+      document.getElementById("output").textContent =
+        `No se encontró "${SEARCH}"`;
+      return;
+    }
+
+    document.getElementById("output").textContent =
+      `${foundTeam.team_name} | ` +
+      `Mapa ${data.map_count} | ` +
+      `Top ${foundTeam.rank} | ` +
+      `${Number(foundTeam.final_score).toFixed(1)} pts`;
+
+  } catch (error) {
+    document.getElementById("output").textContent =
+      `Error cargando datos`;
+    console.error(error);
+  }
+}
+
+loadStatus();
+setInterval(loadStatus, 15000);
+</script>
+</body>
+</html>
