@@ -1,6 +1,6 @@
 function createRow(team, index){
 
-    const qualified = index < 3;
+    const qualified = index < 0;
 
     return `
         <div class="row ${qualified ? 'qualified' : ''}">
