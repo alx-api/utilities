@@ -35,11 +35,17 @@ let map_count=0;
 
 const params = new URLSearchParams(window.location.search);
 const SHEET_ID = params.get("sheetid");
+const SOURCE = params.get("source") || "sh";
 
 async function loadStandings(){
 
+    const WORKERS = {
+    sh: "https://xls-to-json.ialexk.workers.dev?tab=DATOS",
+    ck: "https://xls-to-json-ck.ialexk.workers.dev"
+    };
+
     const url =
-        `https://xls-to-json.ialexk.workers.dev/?sheet=${SHEET_ID}&tab=DATOS`;
+    `${WORKERS[SOURCE]}?sheet=${SHEET_ID}`;
 
     try{
 
