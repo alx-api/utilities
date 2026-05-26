@@ -40,12 +40,11 @@ const SOURCE = params.get("source") || "sh";
 async function loadStandings(){
 
     const WORKERS = {
-    sh: "https://xls-to-json.ialexk.workers.dev?tab=DATOS",
-    ck: "https://xls-to-json-ck.ialexk.workers.dev"
+    sh: `https://xls-to-json.ialexk.workers.dev?tab=DATOS&sheet=${SHEET_ID}`,
+    ck: `https://xls-to-json-ck.ialexk.workers.dev?sheet=${SHEET_ID}`
     };
 
-    const url =
-    `${WORKERS[SOURCE]}?sheet=${SHEET_ID}`;
+    const url =WORKERS[SOURCE];
 
     try{
 
