@@ -10,6 +10,12 @@
     --purple-glow:rgba(141,77,255,.35);
 
     --wine:#6e1d32;
+    --wine-glow:#9b1e3f;
+
+    --darkgray: #323232;
+
+    --blue-dark: rgba(0,29,68,1);
+    --blue-glow: rgba(21,72,156,1);
 
     --blue:#355c9a;
 
@@ -28,13 +34,13 @@ body{
     background:
     radial-gradient(
         circle at top left,
-        rgba(141,77,255,.22),
-        transparent 34%
+        var(--blue-glow),
+        transparent 10%
     ),
 
     radial-gradient(
         circle at bottom right,
-        rgba(177,47,69,.18),
+        var(--wine),
         transparent 28%
     ),
 
@@ -109,12 +115,12 @@ body::before{
     background:
     linear-gradient(
         180deg,
-        var(--purple),
-        var(--gold)
+        var(--gold),
+        var(--darkgray)
     );
 
     box-shadow:
-    0 0 18px rgba(141,77,255,.55);
+    0 0 18px rgba(110,29,50,.55);
 }
 
 .board{
@@ -176,7 +182,7 @@ body::before{
     background:
     linear-gradient(
         90deg,
-        var(--purple),
+        var(--darkgray),
         var(--gold)
     );
 
@@ -213,7 +219,7 @@ body::before{
     background:
     linear-gradient(
         180deg,
-        rgba(141,77,255,.18),
+        var(--darkgray),
         rgba(141,77,255,.04)
     );
 
@@ -230,7 +236,7 @@ body::before{
     color:white;
 
     text-shadow:
-    0 0 16px rgba(141,77,255,.3);
+    0 0 16px var(--darkgray);
 }
 
 .team-info{
