@@ -1,0 +1,87 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Tournament Leaderboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="./css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="title">
+        STANDINGS
+    </div>
+    <div class="board">
+
+        <div class="column" id="left-column"></div>
+
+        <div class="column" id="right-column"></div>
+
+    </div>
+
+</div>
+
+<script src="./js/leaderboard.js"></script>
+
+<script>
+let map_count=0;
+
+async function loadLeaderboard(json) {
+
+    map_count = json.map_count;
+
+    const leaderboard = json.standings
+        .map((team, index) => ({
+
+            rank: team.rank,
+
+            maps: team.placements.filter(v=> Number(v) !== 0).length,
+
+            team: team.team_name,
+
+            points: team.final_score,
+
+            kills: team.total_kills,
+
+            players: team.players   
+                ?.map(player => `${player.name} - ${
+                        player.kills?.reduce(
+                            (total, kill) => total + kill, 0
+                        )
+                    } ☠️`)
+                .join(" • ")
+
+        }))
+
+        .sort((a,b) => a.rank - b.rank)
+
+        .slice(0,16);
+
+    renderLeaderboard(leaderboard);
+}
+
+
+const es = new EventSource("https://wtfmaps-dev.ialexk.workers.dev");
+
+es.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    loadLeaderboard(data);
+    console.log("normalized:", data);
+};
+
+es.onerror = (err) => {
+    console.error("SSE error:", err);
+};
+
+</script>
+
+</body>
+</html>
