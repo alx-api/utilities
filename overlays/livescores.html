@@ -34,6 +34,7 @@
 
 <script>
 let map_count=0;
+let event_name="CoD WZ RSS";
 
 async function loadLeaderboard() {
 
@@ -45,6 +46,7 @@ async function loadLeaderboard() {
     const json = await response.json();
 
     map_count = json.map_number;
+    event_name = json.event_name;
 
     const leaderboard = json.standings
         .map((team) => ({

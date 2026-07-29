@@ -49,7 +49,7 @@ function renderLeaderboard(data){
     const rightColumn = document.getElementById("right-column");
 
     document.querySelector(".title").innerHTML =
-    `STANDINGS • MAP ${map_count}`;
+    `${event_name} • MAP ${map_count}`;
 
     const leftSide = data.slice(0,8);
 
