@@ -44,7 +44,7 @@ async function loadStandings(){
 
         const json = await response.json();
 
-        map_count = json.map_count;
+        map_count = json.map_number;
 
         const firstLoad = standings.length === 0;
 
@@ -62,7 +62,7 @@ async function loadStandings(){
                 kills: team.total_kills,
 
                 players: team.players
-                    ?.map(player => player.name)
+                    ?.map(player => `${player.name} - ${player.kills} ☠️`)
                     .join(" • ")
 
             }))
