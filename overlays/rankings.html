@@ -37,6 +37,12 @@ let map_count=0;
 let event_name="CoD WZ RSS";
 const params = new URLSearchParams(window.location.search);
 const EVENT_ID = params.get("event");
+const eventNames = [
+    {"id": "CODWRS_2026_Championship_G_AExt",
+    "name": "Group Stage - A"},
+    {"id": "CODWRS_2026_Championship_G_BExt",
+    "name": "Group Stage - B"}
+    ];
 
 async function loadLeaderboard() {
 
@@ -56,7 +62,11 @@ async function loadLeaderboard() {
                 .filter(v => Number(v) !== 0)
                 .length;
 
-    event_name = EVENT_ID;
+    nameMap = Object.fromEntries(
+        eventNames.map(team => [team.id, team.name])
+    );
+
+    event_name = nameMap[EVENT_ID];
 
     const leaderboard = json.standings
         .map((team) => ({
@@ -88,7 +98,7 @@ async function loadLeaderboard() {
 
 loadLeaderboard();
 
-setInterval(loadLeaderboard, 15000);
+setInterval(loadLeaderboard, 8000);
 
 </script>
 
