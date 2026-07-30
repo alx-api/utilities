@@ -1,0 +1,421 @@
+:root {
+  --gold: #f6c453;
+  --purple: #8d4dff;
+  --armor: #ff6a1a;
+  --health: #f4f6fb;
+  --text-main: #f4f6fb;
+  --text-soft: rgba(255,255,255,.72);
+  --text-dim: rgba(255,255,255,.45);
+  --panel-start: rgba(18,24,38,.97);
+  --panel-end: rgba(10,13,20,.97);
+  --blue:#355c9a;
+  --darkgray: #323232;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: transparent;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Oxanium", sans-serif;
+  color: var(--text-main);
+}
+
+.ticker-shell {
+  width: 360px;
+  padding: 8px;
+}
+
+.event-header {
+  min-height: 28px;
+  padding: 0 4px 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.event-name {
+  max-width: 235px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-soft);
+}
+
+.event-meta {
+  display: flex;
+  gap: 6px;
+  white-space: nowrap;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.event-separator {
+  color: var(--purple);
+}
+
+.ticker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(90deg, var(--panel-start), var(--panel-end));
+
+  box-shadow:
+    0 6px 24px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.03);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: card-enter .4s ease forwards;
+  animation-delay: var(--delay);
+}
+
+.team-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+
+  background:
+    linear-gradient(90deg, var(--blue), var(--gold));
+}
+
+.team-header {
+  min-height: 48px;
+  padding: 7px 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(21,72,156,.15),
+      rgba(53, 92, 154,.025)
+    );
+}
+
+.team-heading {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.team-rank {
+  width: 46px;
+  flex-shrink: 0;
+
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -1px;
+
+  text-shadow: 0 0 14px rgba(246,196,83,.22);
+
+}
+
+.team-title {
+  min-width: 0;
+}
+
+.team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.team-alive {
+  color: var(--text-dim);
+}
+
+.team-stats {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.team-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.team-stat-value {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.team-stat-value.gold {
+  color: var(--gold);
+}
+
+.team-stat-label {
+  margin-top: 2px;
+
+  color: var(--text-dim);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.player-row {
+  min-height: 52px;
+  padding: 6px 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  border-top:
+    1px solid rgba(255,255,255,.07);
+}
+
+.player-main-row,
+.player-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.player-main-row {
+  min-width: 0;
+}
+
+.player-status-row {
+  padding-left: 2px;
+}
+
+.player-row.dead {
+  opacity: .38;
+  filter: grayscale(1);
+}
+
+.player-identity,
+.player-name-row {
+  min-width: 0;
+}
+
+.player-name-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.player-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.player-kills {
+  flex-shrink: 0;
+
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.player-poi {
+  margin-top: 1px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: rgba(255,255,255,.3);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .6px;
+}
+
+.dead-icon {
+  flex-shrink: 0;
+  color: #ff6060;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.bars {
+  width: 150px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.status-bar {
+  width: 100%;
+  height: 3px;
+
+  overflow: hidden;
+
+  background:
+    rgba(255,255,255,.09);
+}
+
+.status-bar span {
+  display: block;
+  height: 100%;
+  transition: width .4s ease;
+}
+
+.status-bar.armor span {
+  background: var(--armor);
+  box-shadow: 0 0 7px rgba(255,106,26,.28);
+}
+
+.status-bar.health span {
+  background: var(--health);
+}
+
+.player-cash {
+  flex-shrink: 0;
+
+  text-align: right;
+  white-space: nowrap;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.plates {
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+
+  color: var(--text-main);
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.plate-icon {
+  color: #dceaff;
+
+  font-size: 13px;
+
+  /* transform: rotate(45deg); */
+
+  text-shadow:
+    0 0 8px rgba(220,234,255,.35);
+}
+
+.plate-count {
+  min-width: 14px;
+  text-align: right;
+}
+
+.ticker-footer {
+  min-height: 12px;
+}
+
+.page-dots {
+  padding-top: 6px;
+
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.page-dot {
+  width: 4px;
+  height: 3px;
+
+  border-radius: 20px;
+  background: rgba(255,255,255,.18);
+
+  transition:
+    width .2s ease,
+    background .2s ease;
+}
+
+.page-dot.active {
+  width: 18px;
+  background:
+    linear-gradient(90deg, var(--purple), var(--gold));
+}
+
+.empty-state,
+.error-state {
+  padding: 18px;
+
+  background:
+    linear-gradient(90deg, var(--panel-start), var(--panel-end));
+
+  font-size: 11px;
+  text-align: center;
+}
+
+.error-state {
+  color: #ffaaaa;
+}
+
+@keyframes card-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-meta {
+  margin-top: 2px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--text-dim);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.team-placement {
+  color: var(--text-soft);
+}
+
+
+.icon {
+    width: 18px;
+    height: 18px;
+
+    color: #6cf06c;
+}

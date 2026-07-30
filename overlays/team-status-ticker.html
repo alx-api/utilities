@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Team Status Ticker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles-team-ticker.css">
+</head>
+<body>
+  <main class="ticker-shell">
+    <header class="event-header">
+      <div id="eventName" class="event-name">LIVE EVENT</div>
+      <div class="event-meta">
+        <span id="mapNumber">MAP —</span>
+        <span class="event-separator">•</span>
+        <span id="matchTimer">--:--</span>
+      </div>
+    </header>
+
+    <section id="ticker" class="ticker" aria-live="polite"></section>
+    <footer class="ticker-footer">
+      <div id="pageDots" class="page-dots"></div>
+    </footer>
+  </main>
+
+  <script src="./js/team-ticker.js"></script>
+</body>
+</html>
