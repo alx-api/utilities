@@ -251,6 +251,7 @@ body {
 
 .player-poi {
   margin-top: 1px;
+  margin-left: 5px;
 
   overflow: hidden;
   text-overflow: ellipsis;
