@@ -5,93 +5,84 @@ const CONFIG = {
   pollIntervalMs: 2000,
   showDeadPlayers: true,
   showLegend: true,
+  defaultMap: "havens",
 };
 
-/*
- * Approximate centers and bounds for Area 99.
- * All values are percentages relative to the complete 1110 × 1110 image.
- *
- * x/y: center used as the base position.
- * width/height: area used to spread teams that share the same POI.
- */
-const POI_ZONES = {
-  "TRAIN STATION": {
-    x: 23.5,
-    y: 41.0,
-    width: 11,
-    height: 10,
-  },
-  "POND": {
-    x: 34.5,
-    y: 31.0,
-    width: 10,
-    height: 10,
-  },
-  "MANSION": {
-    x: 49.0,
-    y: 29.5,
-    width: 14,
-    height: 10,
-  },
-  "BARN": {
-    x: 47.5,
-    y: 44.0,
-    width: 11,
-    height: 10,
-  },
-  "MAIN STREET": {
-    x: 37.5,
-    y: 59.0,
-    width: 15,
-    height: 12,
-  },
-  "RESEARCH CENTER": {
-    x: 73.0,
-    y: 42.0,
-    width: 15,
-    height: 13,
-  },
-  "COAL DEPOT": {
-    x: 67.0,
-    y: 55.5,
-    width: 13,
-    height: 11,
-  },
-  "LUMBERMILL": {
-    x: 60.0,
-    y: 66.0,
-    width: 14,
-    height: 10,
-  },
-  "RIVERBOAT": {
-    x: 47.0,
-    y: 68.5,
-    width: 10,
-    height: 8,
+const MAPS = {
+  havens: {
+    label: "Area 99",
+    image: "./assets/havens.png",
+    poiZones: {
+      "TRAIN STATION": { x: 23.5, y: 41.0, width: 11, height: 10 },
+      "POND": { x: 34.5, y: 31.0, width: 10, height: 10 },
+      "MANSION": { x: 49.0, y: 29.5, width: 14, height: 10 },
+      "BARN": { x: 47.5, y: 44.0, width: 11, height: 10 },
+      "MAIN STREET": { x: 37.5, y: 59.0, width: 15, height: 12 },
+      "RESEARCH CENTER": { x: 73.0, y: 42.0, width: 15, height: 13 },
+      "COAL DEPOT": { x: 67.0, y: 55.5, width: 13, height: 11 },
+      "LUMBERMILL": { x: 60.0, y: 66.0, width: 14, height: 10 },
+      "RIVERBOAT": { x: 47.0, y: 68.5, width: 10, height: 8 },
+
+      /*
+       * Initial approximations for API names not visibly labeled
+       * on the supplied Area 99 image.
+       */
+      "CHAPEL": { x: 50.5, y: 31.5, width: 10, height: 9 },
+      "MONUMENT": { x: 35.5, y: 31.5, width: 8, height: 8 },
+    },
+    aliases: {
+      "TRAIN WRECK": "TRAIN STATION",
+    },
   },
 
-  /*
-   * The sample payload includes these names, but they are not printed as
-   * labels on the supplied Area 99 image. They are initial approximations
-   * and are intentionally isolated here so they can be calibrated easily.
-   */
-  "CHAPEL": {
-    x: 50.5,
-    y: 31.5,
-    width: 10,
-    height: 9,
+  rebirth: {
+    label: "Rebirth Island",
+    image: "./assets/rebirth.png",
+    poiZones: {
+      "STRONGHOLD": { x: 22.0, y: 72.0, width: 11, height: 10 },
+      "LIVING QUARTERS": { x: 40.0, y: 66.0, width: 13, height: 10 },
+      "HEADQUARTERS": { x: 47.0, y: 59.0, width: 11, height: 10 },
+      "FACTORY": { x: 55.0, y: 63.0, width: 11, height: 10 },
+      "CONTROL CENTER": { x: 36.0, y: 50.0, width: 13, height: 10 },
+      "PRISON": { x: 52.0, y: 47.0, width: 15, height: 13 },
+      "DOCK": { x: 37.0, y: 40.0, width: 10, height: 11 },
+      "TURBINE": { x: 50.0, y: 31.0, width: 11, height: 10 },
+      "INDUSTRIES": { x: 61.0, y: 31.0, width: 13, height: 10 },
+      "CHEMICAL ENG.": { x: 72.0, y: 38.0, width: 12, height: 10 },
+      "HARBOR": { x: 68.0, y: 47.0, width: 11, height: 11 },
+      "BIO WEAPONS": { x: 73.0, y: 21.0, width: 11, height: 10 },
+    },
+    aliases: {
+      "CHEMICAL ENGINEERING": "CHEMICAL ENG.",
+      "BIOWEAPONS": "BIO WEAPONS",
+      "BIO WEAPONS LABS": "BIO WEAPONS",
+    },
   },
-  "MONUMENT": {
-    x: 35.5,
-    y: 31.5,
-    width: 8,
-    height: 8,
-  },
-};
 
-/* Normalize alternate API names to the labels used by the map. */
-const POI_ALIASES = {
-  "TRAIN WRECK": "TRAIN STATION",
+  fortunes: {
+    label: "Fortune's Keep",
+    image: "./assets/fortunes.png",
+    poiZones: {
+      "TOWN": { x: 31.0, y: 56.0, width: 13, height: 11 },
+      "OVERLOOK": { x: 29.0, y: 61.0, width: 11, height: 9 },
+      "GRAVEYARD": { x: 39.0, y: 40.0, width: 12, height: 10 },
+      "TERRACES": { x: 44.0, y: 30.0, width: 13, height: 10 },
+      "KEEP": { x: 57.0, y: 30.0, width: 12, height: 11 },
+      "GATEHOUSE": { x: 49.0, y: 49.0, width: 12, height: 10 },
+      "GROTTO": { x: 42.0, y: 56.0, width: 11, height: 10 },
+      "SMUGGLERS COVE": { x: 50.0, y: 61.0, width: 14, height: 9 },
+      "BAY": { x: 70.0, y: 34.0, width: 12, height: 10 },
+      "WINERY": { x: 67.0, y: 49.0, width: 13, height: 12 },
+      "LIGHTHOUSE": { x: 64.0, y: 58.0, width: 11, height: 9 },
+      "PIER": { x: 76.0, y: 60.0, width: 10, height: 9 },
+    },
+    aliases: {
+      "SMUGGLER'S COVE": "SMUGGLERS COVE",
+      "SMUGGLERS' COVE": "SMUGGLERS COVE",
+      "FORTUNES KEEP": "KEEP",
+      "FORTUNE'S KEEP": "KEEP",
+    },
+  },
 };
 
 const TEAM_COLORS = [
@@ -126,12 +117,33 @@ const PLAYER_OFFSETS = {
   ],
 };
 
+const mapElement = document.getElementById("map");
+const mapImageElement = document.getElementById("map-image");
 const markersElement = document.getElementById("markers");
 const statusElement = document.getElementById("status");
 const legendElement = document.getElementById("legend");
 
 let requestInProgress = false;
 let lastPayloadTimestamp = null;
+
+function getRequestedMapKey() {
+  const params = new URLSearchParams(window.location.search);
+  const requested = (params.get("map") || CONFIG.defaultMap)
+    .trim()
+    .toLowerCase();
+
+  return MAPS[requested] ? requested : CONFIG.defaultMap;
+}
+
+const activeMapKey = getRequestedMapKey();
+const activeMap = MAPS[activeMapKey];
+
+mapImageElement.src = activeMap.image;
+mapElement.setAttribute(
+  "aria-label",
+  `${activeMap.label} live player map`
+);
+document.title = `${activeMap.label} Live Player Map`;
 
 function normalizePoi(value) {
   if (typeof value !== "string") {
@@ -144,7 +156,7 @@ function normalizePoi(value) {
     return null;
   }
 
-  return POI_ALIASES[normalized] ?? normalized;
+  return activeMap.aliases[normalized] ?? normalized;
 }
 
 function hashString(value) {
@@ -164,15 +176,19 @@ function seededPercent(seed, min, max) {
 }
 
 function getTeamBasePosition(poiName, teamName) {
-  const zone = POI_ZONES[poiName];
+  const zone = activeMap.poiZones[poiName];
 
   if (!zone) {
     return null;
   }
 
-  const seed = hashString(`${poiName}|${teamName}`);
+  const seed = hashString(`${activeMapKey}|${poiName}|${teamName}`);
   const xRatio = seededPercent(seed, -0.38, 0.38);
-  const yRatio = seededPercent(Math.imul(seed, 31) >>> 0, -0.38, 0.38);
+  const yRatio = seededPercent(
+    Math.imul(seed, 31) >>> 0,
+    -0.38,
+    0.38
+  );
 
   return {
     x: zone.x + zone.width * xRatio,
@@ -257,7 +273,7 @@ function renderMarkers(payload) {
 
   if (unknownPois.size > 0) {
     console.warn(
-      "POIs without coordinates:",
+      `[${activeMap.label}] POIs without coordinates:`,
       [...unknownPois].sort()
     );
   }
@@ -324,10 +340,6 @@ async function refreshMap() {
       throw new Error("The response does not contain a teams array");
     }
 
-    /*
-     * Avoid replacing all marker nodes when the worker returns the exact
-     * same snapshot. updated_at is present in the supplied example.
-     */
     const payloadTimestamp = payload.updated_at ?? null;
 
     if (
@@ -344,13 +356,17 @@ async function refreshMap() {
     );
 
     setStatus(
-      `${payload.event_name || payload.event || "Live"} · ` +
+      `${activeMap.label} · ` +
+        `${payload.event_name || payload.event || "Live"} · ` +
         `${playerCount} players`,
       "ok"
     );
   } catch (error) {
     console.error("Unable to update map:", error);
-    setStatus(`Connection error: ${error.message}`, "error");
+    setStatus(
+      `${activeMap.label} · Connection error: ${error.message}`,
+      "error"
+    );
   } finally {
     requestInProgress = false;
   }
