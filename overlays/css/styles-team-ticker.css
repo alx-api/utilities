@@ -236,7 +236,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1;
 }
@@ -414,8 +414,14 @@ body {
 
 
 .icon {
-    width: 18px;
-    height: 18px;
+  width: 18px;
+  height: 18px;
 
-    color: #6cf06c;
+  display: inline-block;
+  flex-shrink: 0;
+
+  color: #6cf06c;
+  fill: currentColor;
+
+  vertical-align: middle;
 }
