@@ -602,7 +602,7 @@ function rotatePage() {
 
 loadLiveData();
 
-/* window.setInterval(
+window.setInterval(
   loadLiveData,
   config.refreshMs
 );
@@ -610,4 +610,4 @@ loadLiveData();
 window.setInterval(
   rotatePage,
   config.rotationMs
-); */
+);
