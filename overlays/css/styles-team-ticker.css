@@ -74,7 +74,7 @@ body {
 .ticker {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0px;
 }
 
 .team-card {
@@ -106,7 +106,7 @@ body {
 
 .team-header {
   min-height: 48px;
-  padding: 7px 10px;
+  padding: 2px 10px;
 
   display: flex;
   align-items: center;
@@ -127,12 +127,12 @@ body {
 }
 
 .team-rank {
-  width: 46px;
+  width: 36px;
   flex-shrink: 0;
 
   color: var(--gold);
-  font-size: 22px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 150;
   letter-spacing: -1px;
 
   text-shadow: 0 0 14px rgba(246,196,83,.22);
@@ -158,7 +158,7 @@ body {
 
 .team-stats {
   display: flex;
-  gap: 12px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
@@ -189,11 +189,11 @@ body {
 
 .player-row {
   min-height: 52px;
-  padding: 6px 10px;
+  padding: 0px 10px;
 
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0px;
 
   border-top:
     1px solid rgba(255,255,255,.07);
@@ -309,8 +309,8 @@ body {
   text-align: right;
   white-space: nowrap;
 
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 150;
 }
 
 .plates {
@@ -323,8 +323,8 @@ body {
 
   color: var(--text-main);
 
-  font-size: 20px;
-  font-weight: 900;
+  font-size: 16px;
+  font-weight: 100;
 }
 
 .plate-icon {
