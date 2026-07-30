@@ -30,7 +30,7 @@ body {
 }
 
 .ticker-shell {
-  width: 360px;
+  width: 320px;
   padding: 8px;
 }
 
@@ -169,7 +169,7 @@ body {
 }
 
 .team-stat-value {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 900;
   line-height: 1;
 }
@@ -182,7 +182,7 @@ body {
   margin-top: 2px;
 
   color: var(--text-dim);
-  font-size: 7px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -236,7 +236,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 800;
   line-height: 1;
 }
@@ -309,7 +309,7 @@ body {
   text-align: right;
   white-space: nowrap;
 
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -323,7 +323,7 @@ body {
 
   color: var(--text-main);
 
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 900;
 }
 
@@ -404,7 +404,7 @@ body {
 
   color: var(--text-dim);
 
-  font-size: 8px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -421,8 +421,8 @@ body {
   display: inline-block;
   flex-shrink: 0;
 
-  color: #6cf06c;
+  color: #f4f6fb;
   fill: currentColor;
 
-  vertical-align: middle;
+  vertical-align: top;
 }

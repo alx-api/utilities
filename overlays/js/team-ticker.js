@@ -364,10 +364,6 @@ function renderTeam(team, index) {
                   ${alivePlayers}/${players.length}
                   ALIVE
               </span>
-
-              <span class="team-placement">
-                  PLACE: ${Number(team.placement) || 0}
-              </span>
             </div>
 
           </div>
@@ -388,6 +384,24 @@ function renderTeam(team, index) {
 
             <span class="team-stat-label">
               KILLS
+            </span>
+
+          </div>
+
+          <div class="team-stat">
+
+            <span
+              class="team-stat-value"
+            >
+              ${
+                Number(
+                  team.placement
+                ) || 0
+              }
+            </span>
+
+            <span class="team-stat-label">
+              PLC
             </span>
 
           </div>
