@@ -310,10 +310,10 @@ function renderPlayer(player) {
           } armor plates"
         >
           <span>
-            <svg class="icon"><use href="../icons/icons.svg#target"></use></svg> ${Number(player.kills) || 0}
+            <svg class="icon"><use href="./icons/icons.svg#target"></use></svg> ${Number(player.kills) || 0}
           </span>
           <span>
-            <svg class="icon"><use href="../icons/icons.svg#shield"></use></svg> ${Number(player.plates) || 0}
+            <svg class="icon"><use href="./icons/icons.svg#shield"></use></svg> ${Number(player.plates) || 0}
           </span>
 
         </div>
