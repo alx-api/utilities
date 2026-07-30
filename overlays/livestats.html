@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Warzone Stats</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./css/styles-stats.css"
+  >
+</head>
+
+<body>
+
+  <main class="stats-screen">
+
+    <header class="screen-header">
+
+      <div class="screen-title">
+
+        <span class="screen-eyebrow">
+          EWC WARZONE RESURGENCE
+        </span>
+
+        <h1>
+          PLAYER & TEAM STATS
+        </h1>
+
+      </div>
+
+      <div class="event-info">
+
+        <span id="eventName">
+          LIVE EVENT
+        </span>
+
+        <span class="event-separator">
+          •
+        </span>
+
+        <span id="mapNumber">
+          MAP —
+        </span>
+
+      </div>
+
+    </header>
+
+    <section class="tables-grid">
+
+      <article class="stats-panel">
+
+        <header class="panel-header">
+
+          <div>
+
+            <span class="panel-label">
+              PLAYER LEADERBOARD
+            </span>
+
+            <h2>
+              TOP FRAGGERS
+            </h2>
+
+          </div>
+
+          <div class="panel-icon">
+            ☠
+          </div>
+
+        </header>
+
+        <div class="table-header fraggers-columns">
+
+          <span>RANK</span>
+          <span>PLAYER</span>
+          <span>TEAM</span>
+          <span>MAPS</span>
+          <span>KILLS</span>
+
+        </div>
+
+        <div
+          id="topFraggers"
+          class="table-body"
+        ></div>
+
+      </article>
+
+      <article class="stats-panel">
+
+        <header class="panel-header">
+
+          <div>
+
+            <span class="panel-label">
+              TEAM PERFORMANCE
+            </span>
+
+            <h2>
+              PLACEMENT AVERAGE
+            </h2>
+
+          </div>
+
+          <div class="panel-icon">
+            ◈
+          </div>
+
+        </header>
+
+        <div class="table-header placement-columns">
+
+          <span>RANK</span>
+          <span>TEAM</span>
+          <span>MAPS</span>
+          <span>AVG</span>
+
+        </div>
+
+        <div
+          id="placementAverage"
+          class="table-body"
+        ></div>
+
+      </article>
+
+    </section>
+
+    <footer class="screen-footer">
+
+      <span>
+        OFFICIAL EVENT STATISTICS
+      </span>
+
+      <span id="lastUpdate">
+        WAITING FOR DATA
+      </span>
+
+    </footer>
+
+  </main>
+
+  <script src="./js/stats.js"></script>
+
+</body>
+</html>
