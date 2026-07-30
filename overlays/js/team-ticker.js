@@ -3,7 +3,7 @@ const DEFAULT_DATA_URL =
 
 const DEFAULT_VISIBLE_TEAMS = 2;
 const DEFAULT_ROTATION_MS = 10000;
-const DEFAULT_REFRESH_MS = 10000;
+const DEFAULT_REFRESH_MS = 1000;
 
 const elements = {
   ticker: document.getElementById("ticker"),

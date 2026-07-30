@@ -426,3 +426,15 @@ body {
 
   vertical-align: top;
 }
+
+.team-ticker,
+.ticker,
+.teams-container,
+.team-card,
+.page-dot,
+.player-row {
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}

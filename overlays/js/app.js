@@ -3,7 +3,7 @@
 const CONFIG = {
   endpoint: "https://json-live-merge.ialexk.workers.dev/",
   pollIntervalMs: 2000,
-  showDeadPlayers: true,
+  showDeadPlayers: false,
   showLegend: true,
   defaultMap: "havens",
 };
