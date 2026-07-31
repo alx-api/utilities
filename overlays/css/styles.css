@@ -196,19 +196,6 @@ body::before{
     0 12px 30px rgba(0,0,0,.5);
 }
 
-.qualified{
-    background:
-    linear-gradient(
-        90deg,
-        rgba(246,196,83,.14),
-        rgba(18,24,38,.98) 20%
-    );
-
-    box-shadow:
-    0 0 22px rgba(246,196,83,.08),
-    0 6px 24px rgba(0,0,0,.45);
-}
-
 .rank-section{
     align-self:stretch;
 
@@ -225,6 +212,31 @@ body::before{
 
     border-right:
     1px solid rgba(255,255,255,.03);
+}
+
+.qualified{
+    background: #001D44;
+    background: linear-gradient(90deg,rgba(0, 29, 68, 1) 92%, rgba(0, 255, 102, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
+}
+.survival{
+    background: #001D44;
+    background: linear-gradient(90deg,rgba(0, 29, 68, 1) 92%, rgba(255, 162, 0, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
+}
+.eliminated{
+    background: #001D44;
+    background: linear-gradient(90deg,rgba(0, 29, 68, 1) 92%, rgba(255, 0, 0, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
 }
 
 .rank{
@@ -246,6 +258,10 @@ body::before{
     flex-direction:column;
 
     overflow:hidden;
+}
+
+.team-info.wiped {
+  color:var(--text-dim);
 }
 
 .player{
@@ -296,6 +312,10 @@ body::before{
     0 0 14px rgba(246,196,83,.24);
 }
 
+.points.wiped{
+    color:var(--text-soft);
+}
+
 .kills,
 .maps{
     margin-top:3px;
@@ -306,4 +326,17 @@ body::before{
     letter-spacing:1px;
 
     color:var(--text-soft);
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: 1px;
+  
+  fill: currentColor;
+
+  vertical-align: top;
 }

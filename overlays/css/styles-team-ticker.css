@@ -2,6 +2,7 @@
   --gold: #f6c453;
   --purple: #8d4dff;
   --armor: #ff6a1a;
+  --plates: #0babf5;
   --health: #f4f6fb;
   --text-main: #f4f6fb;
   --text-soft: rgba(255,255,255,.72);
@@ -295,7 +296,7 @@ body {
 }
 
 .status-bar.armor span {
-  background: var(--armor);
+  background: var(--plates);
   box-shadow: 0 0 7px rgba(255,106,26,.28);
 }
 

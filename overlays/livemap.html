@@ -60,8 +60,8 @@ async function loadLeaderboard() {
             kills: team.players?.reduce((total, player) => total + player.kills, 0),
 
             players: team.players
-                ?.map(player => `${player.name} - ${player.kills} ☠️`)
-                .join(" • ")
+                ?.map(player => `${player.name} ${player.kills} ☠️`)
+                .join(" ")
 
         }))
 
@@ -84,7 +84,7 @@ async function loadLeaderboard() {
 
 loadLeaderboard();
 
-setInterval(loadLeaderboard, 15000);
+ setInterval(loadLeaderboard, 15000);
 
 </script>
 

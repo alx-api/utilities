@@ -232,7 +232,7 @@ function renderStatusBar(
 
 function renderPlayer(player) {
   const isDead =
-    Boolean(player.is_dead);
+    Boolean(player.is_dead || player.health===0);
 
   const playerClass =
     isDead
