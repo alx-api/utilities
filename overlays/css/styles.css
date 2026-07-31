@@ -21,6 +21,7 @@
 
     --text-main:#f4f6fb;
     --text-soft:rgba(255,255,255,.72);
+    --wiped:rgba(255,255,255,.65);
     --text-dim:rgba(255,255,255,.44);
 }
 
@@ -261,7 +262,7 @@ body::before{
 }
 
 .team-info.wiped {
-  color:var(--text-dim);
+  color:var(--wiped);
 }
 
 .player{
