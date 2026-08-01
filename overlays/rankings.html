@@ -68,7 +68,7 @@ async function loadLeaderboard() {
         eventNames.map(team => [team.id, team.name])
     );
 
-    event_name = nameMap[EVENT_ID] | "Leaderboard";
+    event_name = nameMap[EVENT_ID] || "Leaderboard";
 
     const leaderboard = json.standings
         .map((team) => ({

@@ -9,9 +9,6 @@ function createRow(team, index){
                     ? "wiped"
                     : "";
     
-    console.log("team.squads_alive:",team.squads_alive);
-    console.log("wiped:",wiped);
-
     return `
         <div class="row ">
 
