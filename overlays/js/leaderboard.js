@@ -1,20 +1,21 @@
 function createRow(team, index){
 
-    let qualification;
-    
-    (index < 5) ? qualification = "qualified"
-    : (index >= 13) ? qualification = "eliminated"
-    : qualification = "survival";
-    
+    const qualification = (index < 6) ? "qualified":"";
+    //: (index >= 6) ? qualification = "eliminated";
+    //: qualification = "survival";
 
-    const wiped = team.players_alive === 0
-        ? "wiped"
-        : "";
+    const wiped = team.squads_alive <= 1 ? "nogame" 
+                  : team.players_alive === 0
+                    ? "wiped"
+                    : "";
+    
+    console.log("team.squads_alive:",team.squads_alive);
+    console.log("wiped:",wiped);
 
     return `
         <div class="row ">
 
-            <div class="rank-section ${qualification || 'qualified'}">
+            <div class="rank-section ${qualification || ''}">
                 <div class="rank">
                     #${index + 1}
                 </div>

@@ -34,6 +34,7 @@
 
 <script>
 let map_count=0;
+let squads_alive=0;
 let event_name="CoD WZ RSS";
 
 async function loadLeaderboard() {
@@ -49,6 +50,7 @@ async function loadLeaderboard() {
 
     map_count = json.map_number;
     event_name = json.event_name;
+    squads_alive = json.squads_alive || 0;
 
     const teamsByName = new Map(
       json.teams.map(team => [
@@ -73,6 +75,8 @@ async function loadLeaderboard() {
             points: team.final_score,
 
             kills: team.total_kills,
+
+            squads_alive: squads_alive,
 
             players_alive: liveTeam?.players?.filter(
                             player => !player.is_dead
