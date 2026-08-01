@@ -44,7 +44,7 @@ function createRow(team, index){
                 </div>
 
                 <div class="maps">
-                    MAP ${team.maps}
+                    MAPAS ${team.maps}
                 </div>
 
             </div>
@@ -59,7 +59,7 @@ function renderLeaderboard(data){
     const rightColumn = document.getElementById("right-column");
 
     document.querySelector(".title").innerHTML =
-    `${event_name} • MAP ${map_count}`;
+    `${event_name} • MAPA ${map_count}`;
 
     const leftSide = data.slice(0,8);
 

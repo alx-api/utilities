@@ -41,7 +41,9 @@ const eventNames = [
     {"id": "CODWRS_2026_Championship_G_AExt",
     "name": "Group Stage - A"},
     {"id": "CODWRS_2026_Championship_G_BExt",
-    "name": "Group Stage - B"}
+    "name": "Group Stage - B"},
+    {"id": "CODWRS_2026_Championship_SurvivalExt",
+    "name": "Survival"}
     ];
 
 async function loadLeaderboard() {
@@ -66,7 +68,7 @@ async function loadLeaderboard() {
         eventNames.map(team => [team.id, team.name])
     );
 
-    event_name = nameMap[EVENT_ID];
+    event_name = nameMap[EVENT_ID] | "Leaderboard";
 
     const leaderboard = json.standings
         .map((team) => ({
