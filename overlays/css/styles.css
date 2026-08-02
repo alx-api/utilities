@@ -16,6 +16,7 @@
 
     --blue-dark: rgba(0,29,68,1);
     --blue-glow: rgba(21,72,156,1);
+    --matchpoint: rgba(21, 113, 255,1);
 
     --blue:#355c9a;
 
@@ -197,6 +198,11 @@ body::before{
     0 12px 30px rgba(0,0,0,.5);
 }
 
+.row.matchpoint {
+  background: #001D44;
+  background: linear-gradient(180deg,rgba(0, 29, 68, 0) 85%, rgba(0, 255, 102, 1) 100%);
+}
+
 .rank-section{
     align-self:stretch;
 
@@ -239,6 +245,14 @@ body::before{
     0 0 22px rgba(246,196,83,.08),
     0 6px 24px rgba(0,0,0,.45);
 }
+.matchpoint{
+    background: #001D44;
+    background: linear-gradient(90deg,var(--matchpoint) 92%, rgba(0, 255, 102, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
+}
 
 .rank{
     font-size:28px;
@@ -261,8 +275,12 @@ body::before{
     overflow:hidden;
 }
 
-.team-info.wiped {
+/* .team-info.wiped {
   color:var(--wiped);
+} */
+
+.matchpoint-team{
+  color:var(--matchpoint);
 }
 
 .player{
@@ -313,7 +331,7 @@ body::before{
     0 0 14px rgba(246,196,83,.24);
 }
 
-.points.wiped{
+.wiped{
     color:var(--text-soft);
 }
 

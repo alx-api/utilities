@@ -1,6 +1,6 @@
 function createRow(team, index){
 
-    const qualification = (index < 1) ? "qualified":"";
+    const qualification = (Number(team.points) >= 150) ? "matchpoint":"";
     //: (index >= 6) ? qualification = "eliminated";
     //: qualification = "survival";
 
@@ -10,7 +10,7 @@ function createRow(team, index){
                     : "";
     
     return `
-        <div class="row ">
+        <div class="row">
 
             <div class="rank-section ${qualification || ''}">
                 <div class="rank">
@@ -21,7 +21,7 @@ function createRow(team, index){
             <div class="team-info ${wiped}">
 
                 <div class="player">
-                    ${team.team}
+                    ${team.team} <span class="matchpoint-team ${wiped}">${qualification==="matchpoint"? "MP":""}</span>
                 </div>
 
                 <div class="players">
@@ -41,7 +41,7 @@ function createRow(team, index){
                 </div>
 
                 <div class="maps">
-                    MAPAS ${team.maps}
+                    ${team.maps} MAPAS
                 </div>
 
             </div>
