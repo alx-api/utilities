@@ -1,6 +1,6 @@
 function createRow(team, index){
 
-    const qualification = (index < 6) ? "qualified":"";
+    const qualification = (index < 1) ? "qualified":"";
     //: (index >= 6) ? qualification = "eliminated";
     //: qualification = "survival";
 
