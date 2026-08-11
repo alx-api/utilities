@@ -20,11 +20,18 @@
         STANDINGS
     </div>
 
-    <div class="board">
+    <div class="board-resurgence">
 
         <div class="column" id="left-column"></div>
 
         <div class="column" id="right-column"></div>
+
+    </div>
+    <div class="board-br">
+
+        <div class="column-3" id="column-1"></div>
+        <div class="column-3" id="column-2"></div>
+        <div class="column-3" id="column-3"></div>
 
     </div>
 
@@ -93,14 +100,14 @@ async function loadLeaderboard() {
           };
         })
         .sort((a,b) => a.rank - b.rank)
-        .slice(0,16);
+        //.slice(0,16);
 
     renderLeaderboard(leaderboard);
 }
 
 loadLeaderboard();
 
- //setInterval(loadLeaderboard, 8000);
+setInterval(loadLeaderboard, 8000);
 
 </script>
 
