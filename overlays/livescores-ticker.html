@@ -35,8 +35,13 @@ let map_count=0;
 
 async function loadStandings(){
 
-    const url =
-    "https://json-live-merge.ialexk.workers.dev/";
+    const provider = new URLSearchParams(
+      window.location.search
+    ).get("provider")?.toLowerCase();
+
+    const url = provider === "ig"
+      ? "https://live-merge-dev.ialexk.workers.dev/"
+      : "https://json-live-merge.ialexk.workers.dev/";
 
     try{
 
@@ -55,14 +60,14 @@ async function loadStandings(){
 
                 maps: map_count,
 
-                team: team.team_name,
+                team: (provider === "ig" ? `${team.players[0].name}` : team.team_name),
 
                 points: team.final_score,
 
                 kills: team.total_kills,
 
                 players: team.players
-                    ?.map(player => `${player.name} ${player.kills}<svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`)
+                    ?.map(player => `${player.name} ${player.kills?.reduce((total, kill) => total + kill, 0)}<svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`)
                     .join(" ")
 
             }))

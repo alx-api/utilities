@@ -75,7 +75,7 @@ async function loadLeaderboard() {
 
             maps: map_count,
 
-            team: team.team_name,
+            team: (provider === "ig" ? `${team.players[0].name} - ${team.team_name}` : team.team_name),
 
             points: team.final_score,
 
