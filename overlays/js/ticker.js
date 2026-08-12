@@ -1,10 +1,12 @@
+const TEAMS_PER_PAGE = 5;
+
 function renderCards(){
 
     ticker.innerHTML = "";
 
     const visible = [];
 
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < TEAMS_PER_PAGE; i++){
 
         const item =
             standings[
@@ -87,6 +89,6 @@ function renderCards(){
     });
 
     currentIndex =
-        (currentIndex + 4)
+        (currentIndex + TEAMS_PER_PAGE)
         % standings.length;
 }
