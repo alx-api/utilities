@@ -97,7 +97,7 @@ async function loadLeaderboard() {
 
             maps: map_count,
 
-            team: provider === "ig"
+            team: (provider === "ig" || provider === "lo")
                     ? `${team.players[0].name} ${team.team_name}`
                     : provider === "rp"
                       ? team.team_name.split(" ")[0]
