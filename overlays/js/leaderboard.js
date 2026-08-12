@@ -1,4 +1,4 @@
-const ROWS_PER_COLUMN = 8;
+const ROWS_PER_COLUMN = 9;
 const COLUMN_COUNT = 3;
 const TEAMS_PER_PAGE = ROWS_PER_COLUMN * COLUMN_COUNT;
 const PAGE_ROTATION_MS = 15000;
@@ -13,6 +13,7 @@ function createRow(team, index){
         : team.players_alive === 0
             ? "wiped"
             : "";
+    const filtered = team.filtered || false;
 
     return `
         <div class="row">
@@ -22,9 +23,10 @@ function createRow(team, index){
                 </div>
             </div>
 
-            <div class="team-info ${wiped}">
+            <div class="team-info ${wiped} ${filtered}">
                 <div class="player">
                     ${team.team} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
+                    ${filtered?`<img class="flag" src="./icons/Mexico.svg">`:""}
                 </div>
 
                 <div class="players">
