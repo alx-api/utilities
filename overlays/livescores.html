@@ -36,6 +36,11 @@
 let map_count=0;
 let squads_alive=0;
 let event_name="CoD WZ RSS";
+let providers = {
+  ig:"https://live-ig.ialexk.workers.dev/",
+  rp:"https://live-rpr.ialexk.workers.dev/",
+  cw:"https://json-live-merge.ialexk.workers.dev/",
+}
 
 async function loadLeaderboard() {
 
@@ -43,9 +48,7 @@ async function loadLeaderboard() {
       window.location.search
     ).get("provider")?.toLowerCase();
 
-    const url = provider === "ig"
-      ? "https://live-merge-dev.ialexk.workers.dev/"
-      : "https://json-live-merge.ialexk.workers.dev/";
+    const url = providers[provider] || "https://json-live-merge.ialexk.workers.dev/";
 
     const response = await fetch(url,{
       cache: "no-store",
@@ -75,7 +78,11 @@ async function loadLeaderboard() {
 
             maps: map_count,
 
-            team: team.team_name,
+            team: provider === "ig"
+                    ? `${team.players[0].name} ${team.team_name}`
+                    : provider === "rp"
+                      ? team.team_name.split(" ")[0]
+                      : team.team_name,
 
             points: team.final_score,
 
@@ -88,7 +95,12 @@ async function loadLeaderboard() {
                           ).length ?? 0,
 
             players: team.players
-                ?.map(player => `${player.name} ${player.kills?.reduce((total, kill) => total + kill, 0)}<svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`)
+                ?.map(
+                  player => `${player.name} ${Array.isArray(player.kills)
+                    ? player.kills.reduce((sum, kill) => sum + kill, 0)
+                    : player.kills}
+                    <svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`
+                )
                 .join(" ")
           };
         })
