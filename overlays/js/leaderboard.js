@@ -1,37 +1,38 @@
+const ROWS_PER_COLUMN = 8;
+const COLUMN_COUNT = 3;
+const TEAMS_PER_PAGE = ROWS_PER_COLUMN * COLUMN_COUNT;
+const PAGE_ROTATION_MS = 15000;
+
+let leaderboardData = [];
+let leaderboardPage = 0;
+
 function createRow(team, index){
+    const qualification = Number(team.points) >= 150 ? "matchpoint" : "";
+    const wiped = team.squads_alive <= 1
+        ? "nogame"
+        : team.players_alive === 0
+            ? "wiped"
+            : "";
 
-    const qualification = (Number(team.points) >= 150) ? "matchpoint":"";
-    //: (index >= 6) ? qualification = "eliminated";
-    //: qualification = "survival";
-
-    const wiped = team.squads_alive <= 1 ? "nogame" 
-                  : team.players_alive === 0
-                    ? "wiped"
-                    : "";
-    
     return `
         <div class="row">
-
-            <div class="rank-section ${qualification || ''}">
+            <div class="rank-section ${qualification}">
                 <div class="rank">
-                    #${index + 1}
+                    #${team.rank ?? index + 1}
                 </div>
             </div>
 
             <div class="team-info ${wiped}">
-
                 <div class="player">
-                    ${team.team} <span class="matchpoint-team ${wiped}">${qualification==="matchpoint"? "MP":""}</span>
+                    ${team.team} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
                 </div>
 
                 <div class="players">
                     ${team.players || ""}
                 </div>
-
             </div>
 
             <div class="stats">
-
                 <div class="points ${wiped}">
                     ${Number(team.points).toFixed(2)}
                 </div>
@@ -43,55 +44,41 @@ function createRow(team, index){
                 <div class="maps">
                     ${team.maps} MAPAS
                 </div>
-
             </div>
-
         </div>
     `;
 }
 
-function renderLeaderboard(data){
-    let sliceSize=0;
-    let leftColumn;
-    let centerColumn;
-    let rightColumn;
+function renderLeaderboardPage(){
+    const pageCount = Math.max(1, Math.ceil(leaderboardData.length / TEAMS_PER_PAGE));
+    leaderboardPage %= pageCount;
 
-    if (data.length > 16 ){
-        leftColumn = document.getElementById("column-1");
-        centerColumn = document.getElementById("column-2");
-        rightColumn = document.getElementById("column-3");
-        sliceSize = data.length / 6;
-    } else {
-        leftColumn = document.getElementById("left-column");
-        rightColumn = document.getElementById("right-column");
-        sliceSize = data.length / 2;
-    }
+    const pageStart = leaderboardPage * TEAMS_PER_PAGE;
+    const pageTeams = leaderboardData.slice(pageStart, pageStart + TEAMS_PER_PAGE);
 
-    document.querySelector(".title").innerHTML =
-    `${event_name} • MAPA ${map_count}`;
+    document.querySelector(".title").textContent =
+        `${event_name} • MAPA ${map_count} • PÁGINA ${leaderboardPage + 1}/${pageCount}`;
 
-    if (data.length > 16 ){
-        const leftSide = data.slice(0,sliceSize);
-        const centerSide = data.slice(sliceSize,sliceSize*2);        
-        const rightSide = data.slice(sliceSize*2,sliceSize * 3);
-        
-        leftColumn.innerHTML =
-        leftSide.map((team, index) => createRow(team, index)).join("");
-        
-        centerColumn.innerHTML =
-        centerSide.map((team, index) => createRow(team, index + 8)).join("");
-        
-        rightColumn.innerHTML =
-        rightSide.map((team, index) => createRow(team, index + 16)).join("");
-    } else {
-        const leftSide = data.slice(0,sliceSize);
-        
-        const rightSide = data.slice(sliceSize,sliceSize * 2);
-        
-        leftColumn.innerHTML =
-        leftSide.map((team, index) => createRow(team, index)).join("");
-        
-        rightColumn.innerHTML =
-        rightSide.map((team, index) => createRow(team, index + 8)).join("");
-    }
+    ["column-1", "column-2", "column-3"].forEach((id, columnIndex) => {
+        const columnStart = columnIndex * ROWS_PER_COLUMN;
+        document.getElementById(id).innerHTML = pageTeams
+            .slice(columnStart, columnStart + ROWS_PER_COLUMN)
+            .map((team, index) => createRow(team, pageStart + columnStart + index))
+            .join("");
+    });
 }
+
+function renderLeaderboard(data){
+    leaderboardData = data;
+    const pageCount = Math.max(1, Math.ceil(leaderboardData.length / TEAMS_PER_PAGE));
+    if (leaderboardPage >= pageCount) leaderboardPage = 0;
+    renderLeaderboardPage();
+}
+
+setInterval(() => {
+    const pageCount = Math.ceil(leaderboardData.length / TEAMS_PER_PAGE);
+    if (pageCount <= 1) return;
+
+    leaderboardPage = (leaderboardPage + 1) % pageCount;
+    renderLeaderboardPage();
+}, PAGE_ROTATION_MS);
