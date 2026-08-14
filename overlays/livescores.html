@@ -40,9 +40,11 @@ let providers = {
   ig:"https://live-ig.ialexk.workers.dev/",
   rp:"https://live-rpr.ialexk.workers.dev/",
   cw:"https://json-live-merge.ialexk.workers.dev/",
-  sh:"https://xls-to-json.ialexk.workers.dev/",
+  // sh:"https://xls-to-json.ialexk.workers.dev/",
   ck:"https://xls-to-json-ck.ialexk.workers.dev/",
   lo:"https://live-loading.ialexk.workers.dev/",
+  pl:"https://json-scores.ialexk.workers.dev/",
+  sh:"https://json-scores.ialexk.workers.dev/",
 }
 
 let requestedPlayersSet;
@@ -79,18 +81,18 @@ async function loadLeaderboard() {
     event_name = json.event_name;
     squads_alive = json.squads_alive || 0;
 
-    const teamsByName = new Map(
+    /* const teamsByName = new Map(
       json.teams.map(team => [
         team.team_name,
         team
       ])
-    );
+    ); */
 
     const leaderboard = json.standings
         .map((team) => {
 
-          const liveTeam =
-            teamsByName.get(team.team_name);
+          /* const liveTeam =
+            teamsByName.get(team.team_name); */
 
           return {
             rank: team.rank,
@@ -113,9 +115,9 @@ async function loadLeaderboard() {
 
             squads_alive: squads_alive,
 
-            players_alive: liveTeam?.players?.filter(
+            /* players_alive: liveTeam?.players?.filter(
                             player => !player.is_dead
-                          ).length ?? 0,
+                          ).length ?? 0, */
 
             players: team.players
                 ?.map(
