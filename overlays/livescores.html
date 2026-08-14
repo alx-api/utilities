@@ -114,9 +114,20 @@ async function loadLeaderboard() {
                       ? team.team_name.split(" ")[0]
                       : team.team_name,
             
-            filtered: team.players?.some(
+            /* filtered: team.players?.some(
                     player => requestedPlayersSet.has(normalize(player.name))
-                  ) ?? false,
+                  ) ?? false, */
+            filtered: team.players?.some(
+                      player => requestedPlayers.some(
+                        requested => normalize(player.name).includes(requested)
+                      )
+                    ) ?? false,
+
+            highlighted: team.players?.some(
+                      player => highlightedPlayers.some(
+                        requested => normalize(player.name).includes(requested)
+                      )
+                    ) ?? false,
 
             points: team.final_score,
 

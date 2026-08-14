@@ -15,9 +15,10 @@ function createRow(team, index){
             ? "wiped"
             : "";
     const filtered = team.filtered || false;
+    const highlighted = team.highlighted || false;
 
     return `
-        <div class="row">
+        <div class="row ${highlighted ? "highlighted" : ""}">
             <div class="rank-section ${qualification}">
                 <div class="rank">
                     #${team.rank ?? index + 1}

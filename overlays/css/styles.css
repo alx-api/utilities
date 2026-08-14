@@ -216,6 +216,12 @@ body::before{
   background: linear-gradient(180deg,rgba(0, 29, 68, 0) 85%, rgba(0, 255, 102, 1) 100%);
 }
 
+.row.highlighted {
+  background: #001D44;
+  color:var(--gold);
+  /*background: linear-gradient(180deg,rgba(0, 29, 68, 0) 85%, rgba(0, 255, 102, 1) 100%);*/
+}
+
 .rank-section{
     align-self:stretch;
 
