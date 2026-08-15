@@ -21,7 +21,7 @@ function renderCards(){
 
     visible.forEach((team, idx)=>{
 
-        const qualification = (idx < 24) ? "qualified":"";
+        const qualification = (team.rank < 25) ? "qualified":"";
         const wiped = team.squads_alive <= 1
             ? "nogame"
             : team.players_alive === 0
