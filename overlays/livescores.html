@@ -47,15 +47,6 @@ let providers = {
   sh:"https://json-scores.ialexk.workers.dev/",
 }
 
-let requestedPlayersSet;
-let highlightedPlayersSet;
-
-function normalize(value) {
-  return String(value ?? "")
-    .trim()
-    .toLocaleLowerCase();
-}
-
 async function loadLeaderboard() {
 
     const provider = new URLSearchParams(
@@ -63,22 +54,6 @@ async function loadLeaderboard() {
     ).get("provider")?.toLowerCase();
 
     const url = providers[provider] || "https://json-live-merge.ialexk.workers.dev/";
-
-    const requestedPlayers = (new URLSearchParams(window.location.search)
-        .get("players") || "")
-        .split(",")
-        .map((name) => name.trim())
-        .filter(Boolean);
-
-    requestedPlayersSet = new Set(requestedPlayers.map(normalize));
-
-    const highlightedPlayers = (new URLSearchParams(window.location.search)
-        .get("highlight") || "")
-        .split(",")
-        .map((name) => name.trim())
-        .filter(Boolean);
-
-    highlightedPlayersSet = new Set(highlightedPlayers.map(normalize));
 
     const response = await fetch(url,{
       cache: "no-store",
@@ -117,17 +92,9 @@ async function loadLeaderboard() {
             /* filtered: team.players?.some(
                     player => requestedPlayersSet.has(normalize(player.name))
                   ) ?? false, */
-            filtered: team.players?.some(
-                      player => requestedPlayers.some(
-                        requested => normalize(player.name).includes(requested)
-                      )
-                    ) ?? false,
+            flagged: team.flagged,
 
-            highlighted: team.players?.some(
-                      player => highlightedPlayers.some(
-                        requested => normalize(player.name).includes(requested)
-                      )
-                    ) ?? false,
+            highlighted: team.highlighted,
 
             points: team.final_score,
 

@@ -306,12 +306,16 @@ body::before{
     font-size:20px;
     font-weight:800;
 
+    text-transform:uppercase;
+
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 
     letter-spacing:.4px;
 }
+
+
 
 .players{
     margin-top:3px;
@@ -386,6 +390,19 @@ body::before{
   display: inline-block;
   flex-shrink: 0;
   margin-top: 1px;
+  
+  fill: currentColor;
+
+  vertical-align: top;
+}
+
+.crown {
+  width: auto;
+  height: 25px;
+
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: -4px;
   
   fill: currentColor;
 

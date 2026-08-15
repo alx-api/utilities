@@ -14,7 +14,7 @@ function createRow(team, index){
         : team.players_alive === 0
             ? "wiped"
             : "";
-    const filtered = team.filtered || false;
+    const flagged = team.flagged || false;
     const highlighted = team.highlighted || false;
 
     return `
@@ -25,10 +25,11 @@ function createRow(team, index){
                 </div>
             </div>
 
-            <div class="team-info ${wiped} ${filtered}">
-                <div class="player">
+            <div class="team-info ${wiped}">
+                <div class="player ${highlighted ? "highlighted" : ""}">
+                    ${highlighted?`<img class="crown" src="./icons/crown2.svg">`:""}
                     ${team.team} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
-                    ${filtered?`<img class="flag" src="./icons/Mexico.svg">`:""}
+                    ${flagged?`<img class="flag" src="./icons/Mexico.svg">`:""}
                 </div>
 
                 <div class="players">
