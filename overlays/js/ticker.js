@@ -21,6 +21,15 @@ function renderCards(){
 
     visible.forEach((team, idx)=>{
 
+        const qualification = (idx < 24) ? "qualified":"";
+        const wiped = team.squads_alive <= 1
+            ? "nogame"
+            : team.players_alive === 0
+                ? "wiped"
+                : "";
+        const flagged = team.flagged || false;
+        const highlighted = team.highlighted || false;
+
         const card =
             document.createElement("div");
 
@@ -29,7 +38,7 @@ function renderCards(){
         card.innerHTML = `
 
 
-            <div class="rank-section">
+            <div class="rank-section ${qualification}">
                 <div class="rank">
                     #${team.rank}
                 </div>
@@ -38,10 +47,12 @@ function renderCards(){
                 </div>
             </div>
 
-            <div class="team-section">
+            <div class="team-section ${highlighted ? "highlighted" : ""}">
 
-                <div class="team-name">
+                <div class="team-name ${highlighted ? "highlighted" : ""}">
+                    ${highlighted?`<img class="crown" src="./icons/crown2.svg">`:""}
                     ${team.team}
+                    ${flagged?`<img class="flag" src="./icons/Mexico.svg">`:""}
                 </div>
 
                 <div class="players">

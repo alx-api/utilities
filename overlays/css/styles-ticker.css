@@ -2,6 +2,13 @@
     --gold:#f6c453;
     --purple:#8d4dff;
 
+    --darkgray: #323232;
+    --blue-dark: rgba(0,29,68,1);
+    --blue-glow: rgba(21,72,156,1);
+    --matchpoint: rgba(21, 113, 255,1);
+
+    --blue:#355c9a;
+
     --text-main:#f4f6fb;
     --text-soft:rgba(255,255,255,.72);
     --text-dim:rgba(255,255,255,.45);
@@ -50,9 +57,9 @@ body{
 
     background:
     linear-gradient(
-        90deg,
-        rgba(18,24,38,.96),
-        rgba(10,13,20,.96)
+        180deg,
+        rgba(27,36,53,.96) 0%,
+        rgba(10,13,20,.98) 100%
     );
 
     box-shadow:
@@ -83,7 +90,7 @@ body{
     background:
     linear-gradient(
         90deg,
-        var(--purple),
+        var(--darkgray),
         var(--gold)
     );
 
@@ -107,17 +114,51 @@ body{
     background:
     linear-gradient(
         180deg,
-        rgba(141,77,255,.18),
+        var(--darkgray),
         rgba(141,77,255,.04)
     );
+
+    border-right:
+    1px solid rgba(255,255,255,.03);
 
     font-size:24px;
     font-weight:900;
 
     letter-spacing:-1px;
 
-    text-shadow:
-    0 0 14px rgba(141,77,255,.3);
+}
+
+.qualified{
+    background: #001D44;
+    background: linear-gradient(90deg,rgba(0, 29, 68, 1) 92%, rgba(0, 255, 102, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
+}
+.survival{
+    background: #001D44;
+    background: linear-gradient(90deg,rgba(0, 29, 68, 1) 92%, rgba(255, 162, 0, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
+}
+.eliminated{
+    background: #001D44;
+    background: linear-gradient(90deg,rgba(0, 29, 68, 1) 92%, rgba(255, 0, 0, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
+}
+.matchpoint{
+    background: #001D44;
+    background: linear-gradient(90deg,var(--matchpoint) 92%, rgba(0, 255, 102, 1) 100%);
+
+    box-shadow:
+    0 0 22px rgba(246,196,83,.08),
+    0 6px 24px rgba(0,0,0,.45);
 }
 
 .team-section{
@@ -130,6 +171,12 @@ body{
     justify-content:center;
 
     overflow:hidden;
+}
+
+.team-section.highlighted {
+  background: #001D44;
+  color:var(--gold);
+  /*background: linear-gradient(180deg,rgba(0, 29, 68, 0) 85%, rgba(0, 255, 102, 1) 100%);*/
 }
 
 .team-name{
@@ -228,6 +275,32 @@ body{
   display: inline-block;
   flex-shrink: 0;
   margin-top: 1px;
+  
+  fill: currentColor;
+
+  vertical-align: top;
+}
+
+.flag {
+  width: 34px;
+  height: auto;
+
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: 1px;
+  
+  fill: currentColor;
+
+  vertical-align: top;
+}
+
+.crown {
+  width: auto;
+  height: 25px;
+
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: -4px;
   
   fill: currentColor;
 

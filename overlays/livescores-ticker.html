@@ -70,6 +70,10 @@ async function loadStandings(){
 
                 team: ((provider === "ig" | provider === "lo") ? `${team.players[0].name}` : team.team_name),
 
+                flagged: team.flagged,
+
+                highlighted: team.highlighted,
+
                 points: team.final_score,
 
                 kills: team.total_kills,
