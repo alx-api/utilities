@@ -7,8 +7,8 @@ let leaderboardData = [];
 let leaderboardPage = 0;
 
 function createRow(team, index){
-    //const qualification = Number(team.points) >= 150 ? "matchpoint" : "";
-    const qualification = (index < 24) ? "qualified":"";
+    const qualification = Number(team.points) >= 150 ? "matchpoint" : "";
+    //const qualification = (index < 24) ? "qualified":"";
     const wiped = team.squads_alive <= 1
         ? "nogame"
         : team.players_alive === 0
