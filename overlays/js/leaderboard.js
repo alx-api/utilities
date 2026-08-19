@@ -7,7 +7,7 @@ let leaderboardData = [];
 let leaderboardPage = 0;
 
 function createRow(team, index){
-    const qualification = Number(team.points) >= 150 ? "matchpoint" : "";
+    const qualification = Number(team.points) >= 120 ? "matchpoint" : "";
     //const qualification = (index < 24) ? "qualified":"";
     const wiped = team.squads_alive <= 1
         ? "nogame"
@@ -16,6 +16,7 @@ function createRow(team, index){
             : "";
     const flagged = team.flagged || false;
     const highlighted = team.highlighted || false;
+    const teamName = getFirstName(team.team);
 
     return `
         <div class="row ${highlighted ? "highlighted" : ""}">
@@ -28,7 +29,7 @@ function createRow(team, index){
             <div class="team-info ${wiped}">
                 <div class="player ${highlighted ? "highlighted" : ""}">
                     ${highlighted?`<img class="crown" src="./icons/crown2.svg">`:""}
-                    ${team.team} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
+                    ${teamName} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
                     ${flagged?`<img class="flag" src="./icons/Mexico.svg">`:""}
                 </div>
 
@@ -78,6 +79,10 @@ function renderLeaderboard(data){
     const pageCount = Math.max(1, Math.ceil(leaderboardData.length / TEAMS_PER_PAGE));
     if (leaderboardPage >= pageCount) leaderboardPage = 0;
     renderLeaderboardPage();
+}
+
+function getFirstName(legend) {
+  return legend.split(/\s+x\s+/i)[0].trim();
 }
 
 setInterval(() => {
