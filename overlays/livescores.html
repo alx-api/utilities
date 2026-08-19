@@ -53,7 +53,8 @@ async function loadLeaderboard() {
       window.location.search
     ).get("provider")?.toLowerCase();
 
-    const url = providers[provider] || "https://json-live-merge.ialexk.workers.dev/";
+    //const url = providers[provider] || "https://json-live-merge.ialexk.workers.dev/";
+    const url = "https://api.ialexk.workers.dev/";
 
     const response = await fetch(url,{
       cache: "no-store",
