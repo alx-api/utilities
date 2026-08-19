@@ -21,7 +21,8 @@ function renderCards(){
 
     visible.forEach((team, idx)=>{
 
-        const qualification = (team.rank < 25) ? "qualified":"";
+        //const qualification = (team.rank < 25) ? "qualified":"";
+        const qualification = Number(team.points) >= 120 ? "matchpoint" : "";
         const wiped = team.squads_alive <= 1
             ? "nogame"
             : team.players_alive === 0
@@ -29,6 +30,8 @@ function renderCards(){
                 : "";
         const flagged = team.flagged || false;
         const highlighted = team.highlighted || false;
+
+        const teamName = getFirstName(team.team);
 
         const card =
             document.createElement("div");
@@ -51,7 +54,7 @@ function renderCards(){
 
                 <div class="team-name ${highlighted ? "highlighted" : ""}">
                     ${highlighted?`<img class="crown" src="./icons/crown2.svg">`:""}
-                    ${team.team}
+                    ${teamName} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
                     ${flagged?`<img class="flag" src="./icons/Mexico.svg">`:""}
                 </div>
 
@@ -102,4 +105,8 @@ function renderCards(){
     currentIndex =
         (currentIndex + TEAMS_PER_PAGE)
         % standings.length;
+}
+
+function getFirstName(legend) {
+  return legend.split(/\s+x\s+/i)[0].trim();
 }
