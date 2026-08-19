@@ -47,7 +47,7 @@ function createRow(team, index){
                 </div>
 
                 <div class="maps">
-                    ${team.maps} MAPAS
+                    ${team.maps || 0} MAPAS
                 </div>
             </div>
         </div>
