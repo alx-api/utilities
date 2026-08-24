@@ -1,0 +1,228 @@
+:root {
+  color-scheme: dark;
+  --gold: #f6c453;
+  --gold-soft: #ffe29a;
+  --blue: #35a7ff;
+  --blue-dark: #1265a8;
+  --lilac: #b486ff;
+  --ink: #07111f;
+  --panel: #0b1728;
+  --card: #111f33;
+  --muted: #a9b7ca;
+  --white: #f8fbff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: transparent;
+}
+
+body {
+  padding: 24px;
+  color: var(--white);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.bonus-hunt {
+  width: min(430px, calc(100vw - 48px));
+  overflow: hidden;
+  border: 1px solid rgba(53, 167, 255, 0.55);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.42), 0 0 24px rgba(53, 167, 255, 0.12);
+}
+
+.bonus-hunt__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 22px 16px;
+}
+
+.bonus-hunt__eyebrow {
+  margin: 0 0 4px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.bonus-hunt__counter {
+  display: grid;
+  flex: 0 0 54px;
+  height: 54px;
+  place-items: center;
+  border: 2px solid var(--lilac);
+  border-radius: 15px;
+  background: #251d3e;
+  box-shadow: 0 0 16px rgba(180, 134, 255, 0.2);
+  color: var(--lilac);
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.bonus-hunt__rule {
+  height: 3px;
+  margin: 0 22px;
+  border-radius: 3px;
+  background: var(--blue);
+}
+
+.bonus-list {
+  display: grid;
+  max-height: 680px;
+  gap: 10px;
+  padding: 16px 14px;
+  overflow: hidden auto;
+  scrollbar-color: var(--blue-dark) transparent;
+  scrollbar-width: thin;
+}
+
+.bonus-card {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 78px;
+  gap: 13px;
+  padding: 8px 12px 8px 8px;
+  border: 1px solid rgba(53, 167, 255, 0.2);
+  border-left: 4px solid var(--blue);
+  border-radius: 12px;
+  background: var(--card);
+  animation: card-in 360ms ease both;
+}
+
+.bonus-card__media {
+  width: 76px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--ink);
+}
+
+.bonus-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bonus-card__placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border: 1px solid rgba(180, 134, 255, 0.4);
+  color: var(--lilac);
+}
+
+.bonus-card__placeholder svg {
+  width: 34px;
+  height: 34px;
+}
+
+.bonus-card__content {
+  min-width: 0;
+}
+
+.bonus-card__name {
+  margin: 0;
+  overflow: hidden;
+  color: var(--gold-soft);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bonus-card__provider {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bonus-card__position {
+  color: var(--lilac);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.bonus-status {
+  display: flex;
+  min-height: 140px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.bonus-status--error {
+  color: #ff9bab;
+}
+
+.bonus-status__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(53, 167, 255, 0.25);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.bonus-hunt__footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px 14px;
+  border-top: 1px solid rgba(53, 167, 255, 0.16);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 9px var(--blue);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 480px) {
+  body { padding: 12px; }
+  .bonus-hunt { width: calc(100vw - 24px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; }
+}

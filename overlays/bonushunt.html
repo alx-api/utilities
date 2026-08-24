@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bonus Hunt</title>
+  <link rel="stylesheet" href="./css/bonushunt.css">
+</head>
+<body>
+  <main class="bonus-hunt" aria-labelledby="bonus-hunt-title">
+    <header class="bonus-hunt__header">
+      <div>
+        <p class="bonus-hunt__eyebrow">BONUS HUNT</p>
+        <h1 id="bonus-hunt-title">Bonos pendientes</h1>
+      </div>
+      <div class="bonus-hunt__counter" aria-label="Cantidad de bonos pendientes">
+        <span id="bonus-count">0</span>
+      </div>
+    </header>
+
+    <div class="bonus-hunt__rule" aria-hidden="true"></div>
+
+    <section id="bonus-list" class="bonus-list" aria-live="polite" aria-busy="true">
+      <div class="bonus-status bonus-status--loading">
+        <span class="bonus-status__spinner" aria-hidden="true"></span>
+        <span>Cargando bonos…</span>
+      </div>
+    </section>
+
+    <footer class="bonus-hunt__footer">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span>Lista en vivo</span>
+    </footer>
+  </main>
+
+  <script src="./js/bonushunt.js" defer></script>
+</body>
+</html>
