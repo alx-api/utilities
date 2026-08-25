@@ -22,7 +22,7 @@ function renderCards(){
     visible.forEach((team, idx)=>{
 
         //const qualification = (team.rank < 25) ? "qualified":"";
-        const qualification = Number(team.points) >= 120 ? "matchpoint" : "";
+        const qualification = Number(team.points) >= 150 ? "matchpoint" : "";
         const wiped = team.squads_alive <= 1
             ? "nogame"
             : team.players_alive === 0
