@@ -1,14 +1,20 @@
 const ROWS_PER_COLUMN = 9;
-const COLUMN_COUNT = 3;
-const TEAMS_PER_PAGE = ROWS_PER_COLUMN * COLUMN_COUNT;
 const PAGE_ROTATION_MS = 15000;
 
 let leaderboardData = [];
 let leaderboardPage = 0;
+
+function getColumnCount(){
+    return leaderboardData.length > ROWS_PER_COLUMN * 2 ? 3 : 2;
+}
+
+function getTeamsPerPage(){
+    return ROWS_PER_COLUMN * getColumnCount();
+}
 let qualification="";
 
 function createRow(team, index){
-    if(qualificationType == "survivor"){
+    if(qualificationType == "survival"){
       qualification = (index < qualificationValue) ? "qualified":"";
     } else if (qualificationType == "matchpoint"){
       qualification = Number(team.points) >= qualificationValue ? "matchpoint" : "";
@@ -60,18 +66,25 @@ function createRow(team, index){
 }
 
 function renderLeaderboardPage(){
-    const pageCount = Math.max(1, Math.ceil(leaderboardData.length / TEAMS_PER_PAGE));
+    const columnCount = getColumnCount();
+    const teamsPerPage = getTeamsPerPage();
+    const pageCount = Math.max(1, Math.ceil(leaderboardData.length / teamsPerPage));
     leaderboardPage %= pageCount;
 
-    const pageStart = leaderboardPage * TEAMS_PER_PAGE;
-    const pageTeams = leaderboardData.slice(pageStart, pageStart + TEAMS_PER_PAGE);
+    const pageStart = leaderboardPage * teamsPerPage;
+    const pageTeams = leaderboardData.slice(pageStart, pageStart + teamsPerPage);
+
+    const board = document.querySelector('.board-br');
+    board.style.gridTemplateColumns = `repeat(${columnCount}, minmax(0, 1fr))`;
 
     document.querySelector(".title").textContent =
         `${event_name} • MAPA ${map_count} • PÁGINA ${leaderboardPage + 1}/${pageCount}`;
 
     ["column-1", "column-2", "column-3"].forEach((id, columnIndex) => {
+        const column = document.getElementById(id);
+        column.style.display = columnIndex < columnCount ? 'flex' : 'none';
         const columnStart = columnIndex * ROWS_PER_COLUMN;
-        document.getElementById(id).innerHTML = pageTeams
+        column.innerHTML = pageTeams
             .slice(columnStart, columnStart + ROWS_PER_COLUMN)
             .map((team, index) => createRow(team, pageStart + columnStart + index))
             .join("");
@@ -80,7 +93,7 @@ function renderLeaderboardPage(){
 
 function renderLeaderboard(data){
     leaderboardData = data;
-    const pageCount = Math.max(1, Math.ceil(leaderboardData.length / TEAMS_PER_PAGE));
+    const pageCount = Math.max(1, Math.ceil(leaderboardData.length / getTeamsPerPage()));
     if (leaderboardPage >= pageCount) leaderboardPage = 0;
     renderLeaderboardPage();
 }
@@ -90,7 +103,7 @@ function getFirstName(legend) {
 }
 
 setInterval(() => {
-    const pageCount = Math.ceil(leaderboardData.length / TEAMS_PER_PAGE);
+    const pageCount = Math.ceil(leaderboardData.length / getTeamsPerPage());
     if (pageCount <= 1) return;
 
     leaderboardPage = (leaderboardPage + 1) % pageCount;

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#071426">
+  <title>Configuración de torneo</title>
+  <link rel="stylesheet" href="./css/lbconfig.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="config-card" aria-labelledby="page-title">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">LiveScores KV</p>
+          <h1 id="page-title">Configuración de torneo</h1>
+          <p class="intro">Consulta y actualiza los datos que utiliza el leaderboard en vivo.</p>
+        </div>
+        <span class="environment" id="environment" aria-label="Entorno actual">Producción</span>
+      </header>
+
+      <div class="status" id="status" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="status-text">Cargando configuración…</span>
+      </div>
+
+      <form id="config-form" novalidate>
+        <fieldset id="config-fields" disabled>
+          <legend class="sr-only">Valores de configuración</legend>
+
+          <div class="form-grid">
+            <label class="field">
+              <span>Proveedor del torneo</span>
+              <select id="provider" name="provider" required>
+                <option value="">Selecciona un proveedor</option>
+                <option value="stathawk">stathawk</option>
+                <option value="reapzr">reapzr</option>
+                <option value="insight">insight</option>
+                <option value="consolekings">consolekings</option>
+                <option value="liveloading">liveloading</option>
+                <option value="repullze">repullze</option>
+                <option value="codwz">codwz</option>
+              </select>
+            </label>
+
+            <label class="field field-wide">
+              <span>Título del torneo</span>
+              <input id="title" name="title" type="text" autocomplete="off" required>
+            </label>
+
+            <fieldset class="field qualification-field">
+              <span>Tipo de clasificación</span>
+              <div class="radio-group">
+                <label class="radio-option"><input name="qualificationType" type="radio" value="matchpoint" required><span>Matchpoint</span></label>
+                <label class="radio-option"><input name="qualificationType" type="radio" value="survival" required><span>Survival</span></label>
+              </div>
+            </fieldset>
+
+            <label class="field">
+              <span>Valor de clasificación</span>
+              <input id="qualificationValue" name="qualificationValue" type="number" step="any" inputmode="decimal" required>
+            </label>
+
+            <label class="field field-wide">
+              <span>ID de Google Sheet</span>
+              <input id="sheetId" name="sheetId" type="text" autocomplete="off" required>
+            </label>
+
+            <label class="field field-wide">
+              <span>Jugadores marcados <img class="flag" src="./icons/Mexico.svg"></span>
+              <textarea id="flaggedPlayers" name="flaggedPlayers" rows="3" spellcheck="false" placeholder="player1, player2"></textarea>
+              <small>Solo escribe los nombres, separados por comas.</small>
+            </label>
+
+            <label class="field field-wide">
+              <span>Jugadores destacados <img class="crown" src="./icons/crown2.svg"></span>
+              <textarea id="highlightedPlayers" name="highlightedPlayers" rows="3" spellcheck="false" placeholder="player1, player2"></textarea>
+              <small>Solo escribe los nombres, separados por comas.</small>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button class="button button-secondary" id="reload-button" type="button">Recargar</button>
+            <button class="button button-primary" id="submit-button" type="submit">
+              <span class="button-label">Guardar cambios</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <script src="./js/lbconfig.js"></script>
+</body>
+</html>
