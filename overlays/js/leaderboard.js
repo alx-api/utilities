@@ -5,24 +5,25 @@ const PAGE_ROTATION_MS = 15000;
 
 let leaderboardData = [];
 let leaderboardPage = 0;
+let qualification="";
 
 function createRow(team, index){
-    const qualification = qualificationType || "matchpoint";
-    if(qualification == "survivor"){
-
+    if(qualificationType == "survivor"){
+      qualification = (index < qualificationValue) ? "qualified":"";
+    } else if (qualificationType == "matchpoint"){
+      qualification = Number(team.points) >= qualificationValue ? "matchpoint" : "";
     }
-    //const qualification = (index < 24) ? "qualified":"";
     const wiped = team.squads_alive <= 1
         ? "nogame"
         : team.players_alive === 0
             ? "wiped"
             : "";
     const flagged = team.flagged || false;
-    const highlighted = team.highlighted || false;
+    const highlighted = team.highlighted ? "highlighted": "";
     const teamName = getFirstName(team.team);
 
     return `
-        <div class="row ${highlighted ? "highlighted" : ""}">
+        <div class="row ${highlighted}">
             <div class="rank-section ${qualification}">
                 <div class="rank">
                     #${team.rank ?? index + 1}
@@ -30,7 +31,7 @@ function createRow(team, index){
             </div>
 
             <div class="team-info ${wiped}">
-                <div class="player ${highlighted ? "highlighted" : ""}">
+                <div class="player ${highlighted}">
                     ${highlighted?`<img class="crown" src="./icons/crown2.svg">`:""}
                     ${teamName} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
                     ${flagged?`<img class="flag" src="./icons/Mexico.svg">`:""}
