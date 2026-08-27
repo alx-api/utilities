@@ -15,6 +15,11 @@
   const reloadButton = document.querySelector("#reload-button");
   const submitButton = document.querySelector("#submit-button");
   const submitLabel = submitButton.querySelector(".button-label");
+  const extractSheetButton = document.querySelector("#extract-sheet-button");
+  const extractionStatus = document.querySelector("#sheet-extraction-status");
+  const tournamentUrlInput = document.querySelector("#tournament-url");
+  const STATHAWK_API_URL = "https://innxzngmpbsiyuksdrvg.supabase.co/rest/v1/tournament_cache";
+  const STATHAWK_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlubnh6bmdtcGJzaXl1a3NkcnZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNDk4MTYsImV4cCI6MjA2MjYyNTgxNn0.1-0yIwPx7sKp1Vb3KtXj6jfgUAlQyYghdxS4alcHodU";
 
   const inputs = {
     provider: document.querySelector("#provider"),
@@ -54,6 +59,7 @@
 
   function fillForm(config) {
     inputs.provider.value = config.provider ?? "";
+    updateExtractorAvailability();
     inputs.title.value = config.title ?? "";
     inputs.qualificationType.value = config.qualificationType ?? "";
     updateQualificationLabel();
@@ -149,6 +155,84 @@
   }
 
   form.addEventListener("submit", saveConfig);
+  function setExtractionStatus(message, state) {
+    extractionStatus.textContent = message;
+    extractionStatus.dataset.state = state;
+  }
+
+  function updateExtractorAvailability() {
+    const isStatHawk = inputs.provider.value === "stathawk";
+    tournamentUrlInput.disabled = !isStatHawk;
+    extractSheetButton.disabled = !isStatHawk;
+
+    if (!isStatHawk) {
+      setExtractionStatus("La extracci\u00f3n autom\u00e1tica s\u00f3lo est\u00e1 disponible para StatHawk.", "idle");
+    } else if (!extractionStatus.dataset.state || extractionStatus.dataset.state === "idle") {
+      setExtractionStatus("Pega la URL del torneo para extraer el ID.", "idle");
+    }
+  }
+
+  function extractTournamentId(value) {
+    const url = new URL(value);
+    const isStatHawk = url.hostname === "stathawk.net" || url.hostname.endsWith(".stathawk.net");
+    const parts = url.pathname.split("/").filter(Boolean);
+    const tournamentIndex = parts.indexOf("tournament");
+    return isStatHawk && tournamentIndex >= 0 ? parts[tournamentIndex + 1] || "" : "";
+  }
+
+  function extractSheetId(value) {
+    const match = String(value || "").match(/\/d\/([^/?#]+)/);
+    return match?.[1] || "";
+  }
+
+  async function extractGoogleSheetId() {
+    const manualMessage = "No fue posible extraer el ID. Debe colocarse manualmente en el campo Google Sheet ID.";
+    let tournamentId = "";
+
+    try {
+      tournamentId = extractTournamentId(tournamentUrlInput.value.trim());
+    } catch {
+      // The failure message below also covers malformed URLs.
+    }
+
+    if (!tournamentId) {
+      setExtractionStatus(manualMessage, "error");
+      tournamentUrlInput.focus();
+      return;
+    }
+
+    extractSheetButton.disabled = true;
+    extractSheetButton.textContent = "Extrayendo...";
+    setExtractionStatus("Consultando StatHawk...", "loading");
+
+    try {
+      const url = new URL(STATHAWK_API_URL);
+      url.searchParams.set("select", "google_sheets_url");
+      url.searchParams.set("tournament_id", `eq.${tournamentId}`);
+      url.searchParams.set("order", "last_fetched_at.desc");
+      url.searchParams.set("limit", "1");
+
+      const response = await fetch(url, {
+        headers: { apikey: STATHAWK_API_KEY },
+        cache: "no-store",
+      });
+      const result = await parseResponse(response);
+      const sheetUrl = Array.isArray(result) ? result[0]?.google_sheets_url : "";
+      const sheetId = extractSheetId(sheetUrl);
+
+      if (!sheetId) throw new Error("Google Sheet URL not found");
+
+      inputs.sheetId.value = sheetId;
+      inputs.sheetId.dispatchEvent(new Event("input", { bubbles: true }));
+      setExtractionStatus("El campo Google Sheet ID ya fue actualizado.", "success");
+    } catch {
+      setExtractionStatus(manualMessage, "error");
+    } finally {
+      extractSheetButton.textContent = "Extraer Google Sheet ID";
+      updateExtractorAvailability();
+    }
+  }
+
   function updateQualificationLabel() {
     inputs.qualificationValue.previousElementSibling.textContent = inputs.qualificationType.value === "survival"
       ? "Top que clasifica"
@@ -156,7 +240,10 @@
   }
 
   inputs.qualificationType.forEach((option) => option.addEventListener("change", updateQualificationLabel));
+  inputs.provider.addEventListener("change", updateExtractorAvailability);
+  extractSheetButton.addEventListener("click", extractGoogleSheetId);
   reloadButton.addEventListener("click", loadConfig);
   loadConfig();
+  updateExtractorAvailability();
   updateQualificationLabel();
 }());

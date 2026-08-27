@@ -446,3 +446,34 @@ select:focus {
 
   vertical-align: top;
 }
+
+.sheet-extractor > label {
+  color: var(--blue-soft);
+  font-size: 0.85rem;
+  font-weight: 750;
+  letter-spacing: 0.025em;
+}
+
+.input-action {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+.button-special {
+  color: #130b2e;
+  background: linear-gradient(135deg, var(--lilac-bright), var(--lilac));
+  box-shadow: 0 8px 24px rgba(169, 140, 255, 0.2);
+}
+
+.button-special:disabled {
+  opacity: 0.55;
+}
+
+#sheet-extraction-status[data-state="success"] { color: var(--success); }
+#sheet-extraction-status[data-state="error"] { color: var(--danger); }
+#sheet-extraction-status[data-state="loading"] { color: var(--lilac-bright); }
+
+@media (max-width: 680px) {
+  .input-action { grid-template-columns: 1fr; }
+}

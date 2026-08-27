@@ -30,19 +30,6 @@
           <legend class="sr-only">Valores de configuración</legend>
 
           <div class="form-grid">
-            <label class="field">
-              <span>Proveedor del torneo</span>
-              <select id="provider" name="provider" required>
-                <option value="">Selecciona un proveedor</option>
-                <option value="stathawk">stathawk</option>
-                <option value="reapzr">reapzr</option>
-                <option value="insight">insight</option>
-                <option value="consolekings">consolekings</option>
-                <option value="liveloading">liveloading</option>
-                <option value="repullze">repullze</option>
-                <option value="codwz">codwz</option>
-              </select>
-            </label>
 
             <label class="field field-wide">
               <span>Título del torneo</span>
@@ -61,6 +48,29 @@
               <span>Valor de clasificación</span>
               <input id="qualificationValue" name="qualificationValue" type="number" step="any" inputmode="decimal" required>
             </label>
+            
+            <label class="field">
+              <span>Proveedor del torneo</span>
+              <select id="provider" name="provider" required>
+                <option value="">Selecciona un proveedor</option>
+                <option value="stathawk">stathawk</option>
+                <option value="reapzr">reapzr</option>
+                <option value="insight">insight</option>
+                <option value="consolekings">consolekings</option>
+                <option value="liveloading">liveloading</option>
+                <option value="repullze">repullze</option>
+                <option value="codwz">codwz</option>
+              </select>
+            </label>
+
+            <div class="field field-wide sheet-extractor">
+              <label for="tournament-url">URL del torneo</label>
+              <div class="input-action">
+                <input id="tournament-url" name="tournamentUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://stathawk.net/tournament/...">
+                <button class="button button-special" id="extract-sheet-button" type="button">Extraer Google Sheet ID</button>
+              </div>
+              <small id="sheet-extraction-status" role="status" aria-live="polite">Disponible para torneos de StatHawk.</small>
+            </div>
 
             <label class="field field-wide">
               <span>ID de Google Sheet</span>
