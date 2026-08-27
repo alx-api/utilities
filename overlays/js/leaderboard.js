@@ -77,8 +77,24 @@ function renderLeaderboardPage(){
     const board = document.querySelector('.board-br');
     board.style.gridTemplateColumns = `repeat(${columnCount}, minmax(0, 1fr))`;
 
-    document.querySelector(".title").textContent =
-        `${event_name} • MAPA ${map_count} • PÁGINA ${leaderboardPage + 1}/${pageCount}`;
+    const title = document.querySelector(".title");
+    title.replaceChildren();
+
+    const titleText = document.createElement("span");
+    titleText.textContent = `${event_name} • MAPA ${map_count}`;
+
+    const pageIndicator = document.createElement("div");
+    pageIndicator.className = "page-indicator";
+    pageIndicator.setAttribute("role", "img");
+    pageIndicator.setAttribute("aria-label", `Sección ${leaderboardPage + 1} de ${pageCount}`);
+
+    for (let pageIndex = 0; pageIndex < pageCount; pageIndex++) {
+        const segment = document.createElement("span");
+        segment.className = `page-indicator__segment${pageIndex === leaderboardPage ? " is-active" : ""}`;
+        pageIndicator.appendChild(segment);
+    }
+
+    title.append(titleText, pageIndicator);
 
     ["column-1", "column-2", "column-3"].forEach((id, columnIndex) => {
         const column = document.getElementById(id);
