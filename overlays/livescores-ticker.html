@@ -42,6 +42,20 @@ let providers = {
   pl:"https://json-scores.ialexk.workers.dev/",
 //  sh:"https://json-scores.ialexk.workers.dev/",
 }
+const hostname = window.location.hostname;
+
+const isLocal = 
+  hostname  === "localhost" ||
+  hostname  === "127.0.0.1";
+
+const ENV = isLocal ? "dev" : "prod";
+
+const API = {
+  dev: "https://api-dev.ialexk.workers.dev",
+  prod: "https://api.ialexk.workers.dev"
+};
+
+let API_BASE = API[ENV];
 
 async function loadStandings(){
 
@@ -50,7 +64,8 @@ async function loadStandings(){
     ).get("provider")?.toLowerCase();
 
     //const url = providers[provider] || "https://json-live-merge.ialexk.workers.dev/";
-    const url = "https://api.ialexk.workers.dev/";
+    //const url = "https://api.ialexk.workers.dev/";
+    const url = `${API_BASE}/`;
 
     try{
 
@@ -80,7 +95,12 @@ async function loadStandings(){
                 kills: team.total_kills,
 
                 players: team.players
-                    ?.map(player => `${player.name} ${player.kills?.reduce((total, kill) => total + kill, 0)}<svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`)
+                    ?.map(
+                    player => `${player.name} ${Array.isArray(player.kills)
+                        ? player.kills.reduce((sum, kill) => sum + kill, 0)
+                        : player.kills}
+                        <svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`
+                    )
                     .join(" ")
 
             }))
