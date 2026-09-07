@@ -23,6 +23,7 @@
 
     --text-main:#f4f6fb;
     --text-soft:rgba(255,255,255,.72);
+    --text-softer:rgba(255, 255, 255, 0.459);
     --wiped:rgba(255,255,255,.65);
     --text-dim:rgba(255,255,255,.44);
 }
@@ -386,17 +387,23 @@ body::before{
     line-height:1;
 }
 
-.player-name{
-    font-size:14px;
-    letter-spacing:.4px;
+.player-name
+{
+    font-size:20px;
+    letter-spacing:.1px;
 
     white-space:nowrap;
+}
+
+.player-separator
+{
+    color:var(--text-softer);
 }
 
 .player-kills{
     margin-top:4px;
 
-    font-size:12px;
+    font-size:15px;
     /* font-weight:700; */
 
     /* line-height:1; */

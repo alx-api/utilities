@@ -139,7 +139,7 @@ async function loadLeaderboard() {
                     </span>
                   </div>`
                 )
-                .join(" ")
+                .join(" <span class='player-separator'>|</span> ")
           };
         })
         .sort((a, b) => {
