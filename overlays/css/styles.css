@@ -11,6 +11,7 @@
 
     --wine:#6e1d32;
     --wine-glow:#9b1e3f;
+    --red-kill:#ff0044;
 
     --darkgray: #323232;
 
@@ -174,7 +175,7 @@ body::before{
 .column-3{
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:1px;
 }
 
 .row{
@@ -183,15 +184,15 @@ body::before{
     display:grid;
 
     grid-template-columns:
-    58px
+    35px
     minmax(0,1fr)
     92px;
 
-    gap:14px;
+    gap:2px;
 
     align-items:center;
 
-    min-height:72px;
+    min-height:45px;
 
     overflow:hidden;
 
@@ -219,7 +220,7 @@ body::before{
     left:0;
 
     width:100%;
-    height:2px;
+    height:1px;
 
     background:
     linear-gradient(
@@ -253,8 +254,12 @@ body::before{
     align-self:stretch;
 
     display:flex;
+    flex-direction:column;
+    
     align-items:center;
     justify-content:center;
+
+    overflow:hidden;
 
     background:
     linear-gradient(
@@ -302,7 +307,7 @@ body::before{
 
 .rank{
     font-size:28px;
-    font-weight:900;
+    font-weight:700;
 
     letter-spacing:-1px;
 
@@ -310,6 +315,18 @@ body::before{
 
     text-shadow:
     0 0 16px var(--darkgray);
+}
+
+.maps-label{
+    font-size:12px;
+
+    color:var(--text-dim);
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    text-align:right;
 }
 
 .team-info{
@@ -345,23 +362,53 @@ body::before{
 
 
 .players{
-    margin-top:3px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 
-    color:var(--text-dim);
-
-    font-size:15px;
+    min-width:0;
 
     text-transform:uppercase;
 
-    letter-spacing:.9px;
+    white-space:nowrap;
+    overflow:visible;
+
+    padding-left: 10px;
+}
+
+.player-stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    min-width:0;
+
+    line-height:1;
+}
+
+.player-name{
+    font-size:14px;
+    letter-spacing:.4px;
 
     white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+}
+
+.player-kills{
+    margin-top:4px;
+
+    font-size:12px;
+    /* font-weight:700; */
+
+    /* line-height:1; */
+
+    /* color:var(--red-kill); */
+    color:var(--text-soft);
+
+    text-align:center;
 }
 
 .stats{
-    padding-right:12px;
+    padding-right:6px;
 
     display:flex;
     flex-direction:column;
@@ -372,13 +419,12 @@ body::before{
 .points{
     color:var(--gold);
 
-    font-size:28px;
-    font-weight:900;
+    font-size:24px;
+    font-weight:700;
 
     line-height:1;
 
-    text-shadow:
-    0 0 14px rgba(246,196,83,.24);
+    /* text-shadow: 0 0 14px rgba(246,196,83,.24); */
 }
 
 .wiped{
@@ -387,10 +433,10 @@ body::before{
 
 .kills,
 .maps{
-    margin-top:3px;
+    margin-top:0px;
 
-    font-size:11px;
-    font-weight:700;
+    font-size:13px;
+    font-weight:500;
 
     letter-spacing:1px;
 
@@ -398,12 +444,12 @@ body::before{
 }
 
 .icon {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
 
   display: inline-block;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 0px;
   
   fill: currentColor;
 

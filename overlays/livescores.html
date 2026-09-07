@@ -126,10 +126,18 @@ async function loadLeaderboard() {
 
             players: team.players
                 ?.map(
-                  player => `${player.name} ${Array.isArray(player.kills)
+                  player => `
+                  <div class="player-stat">
+                    <span class="player-name">
+                    ${player.name}
+                    </span>
+                    <span class="player-kills">
+                    ${Array.isArray(player.kills)
                     ? player.kills.reduce((sum, kill) => sum + kill, 0)
                     : player.kills}
-                    <svg class="icon"><use href="./icons/icons.svg#target"></use></svg>`
+                    <svg class="icon"><use href="./icons/icons.svg#target"></use></svg>
+                    </span>
+                  </div>`
                 )
                 .join(" ")
           };
@@ -143,7 +151,7 @@ async function loadLeaderboard() {
 loadMetaData();
 loadLeaderboard();
 
-setInterval(loadLeaderboard, 8000);
+// setInterval(loadLeaderboard, 8000);
 
 </script>
 

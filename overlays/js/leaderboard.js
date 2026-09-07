@@ -1,4 +1,4 @@
-const ROWS_PER_COLUMN = 9;
+const ROWS_PER_COLUMN = 16;
 const PAGE_ROTATION_MS = 15000;
 
 let leaderboardData = [];
@@ -26,25 +26,22 @@ function createRow(team, index){
             : "";
     const flagged = team.flagged || false;
     const highlighted = team.highlighted ? "highlighted": "";
-    const teamName = getFirstName(team.team);
+    console.log("team.team:",team.team);
+    const teamName = getFirstName(team.team || team.team_name);
 
     return `
         <div class="row ${highlighted}">
             <div class="rank-section ${qualification}">
                 <div class="rank">
-                    #${team.rank ?? index + 1}
+                    ${team.rank ?? index + 1}
                 </div>
             </div>
 
-            <div class="team-info ${wiped}">
-                <div class="player ${highlighted}">
+            <div class=" ${wiped}">
+                <div class="players ${highlighted}">
                     ${highlighted?`<img class="crown" src="./icons/crown2.svg">`:""}
-                    ${teamName} <span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
+                    ${team.players || ""}<span class="matchpoint-team ${wiped}">${qualification === "matchpoint" ? "MP" : ""}</span>
                     ${flagged?`<img class="flag" src="./icons/Mexico.svg">`:""}
-                </div>
-
-                <div class="players">
-                    ${team.players || ""}
                 </div>
             </div>
 
@@ -57,9 +54,6 @@ function createRow(team, index){
                     ${team.kills} KILLS
                 </div>
 
-                <div class="maps">
-                    ${team.maps || 0} MAPAS
-                </div>
             </div>
         </div>
     `;
@@ -118,10 +112,10 @@ function getFirstName(legend) {
   return legend.split(/\s+x\s+/i)[0].trim();
 }
 
-setInterval(() => {
-    const pageCount = Math.ceil(leaderboardData.length / getTeamsPerPage());
-    if (pageCount <= 1) return;
+// setInterval(() => {
+//     const pageCount = Math.ceil(leaderboardData.length / getTeamsPerPage());
+//     if (pageCount <= 1) return;
 
-    leaderboardPage = (leaderboardPage + 1) % pageCount;
-    renderLeaderboardPage();
-}, PAGE_ROTATION_MS);
+//     leaderboardPage = (leaderboardPage + 1) % pageCount;
+//     renderLeaderboardPage();
+// }, PAGE_ROTATION_MS);
