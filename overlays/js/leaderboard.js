@@ -26,7 +26,7 @@ function createRow(team, index){
             : "";
     const flagged = team.flagged || false;
     const highlighted = team.highlighted ? "highlighted": "";
-    console.log("team.team:",team.team);
+    // console.log("team.team:",team.team);
     const teamName = getFirstName(team.team || team.team_name);
 
     return `
@@ -112,10 +112,10 @@ function getFirstName(legend) {
   return legend.split(/\s+x\s+/i)[0].trim();
 }
 
-// setInterval(() => {
-//     const pageCount = Math.ceil(leaderboardData.length / getTeamsPerPage());
-//     if (pageCount <= 1) return;
+setInterval(() => {
+    const pageCount = Math.ceil(leaderboardData.length / getTeamsPerPage());
+    if (pageCount <= 1) return;
 
-//     leaderboardPage = (leaderboardPage + 1) % pageCount;
-//     renderLeaderboardPage();
-// }, PAGE_ROTATION_MS);
+    leaderboardPage = (leaderboardPage + 1) % pageCount;
+    renderLeaderboardPage();
+}, PAGE_ROTATION_MS);
