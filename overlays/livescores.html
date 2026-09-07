@@ -142,7 +142,15 @@ async function loadLeaderboard() {
                 .join(" ")
           };
         })
-        .sort((a,b) => a.rank - b.rank)
+        .sort((a, b) => {
+          const aHasRank = a.rank != null && Number.isFinite(Number(a.rank));
+          const bHasRank = b.rank != null && Number.isFinite(Number(b.rank));
+
+          if (aHasRank && bHasRank) return Number(a.rank) - Number(b.rank);
+          if (aHasRank) return -1;
+          if (bHasRank) return 1;
+          return 0;
+        })
         //.slice(0,16);
 
     renderLeaderboard(leaderboard);

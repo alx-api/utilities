@@ -33,7 +33,7 @@ function createRow(team, index){
         <div class="row ${highlighted}">
             <div class="rank-section ${qualification}">
                 <div class="rank">
-                    ${team.rank ?? index + 1}
+                    ${index + 1}
                 </div>
             </div>
 
