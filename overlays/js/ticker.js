@@ -43,7 +43,7 @@ function renderCards(){
 
             <div class="rank-section ${qualification}">
                 <div class="rank">
-                    #${team.rank}
+                    #${team.rank ?? currentIndex + idx + 1}
                 </div>
                 <div class="maps-label">
                     M: ${team.maps}
