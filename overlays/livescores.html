@@ -156,11 +156,14 @@ async function loadLeaderboard() {
     renderLeaderboard(leaderboard);
 }
 
-loadMetaData();
-loadLeaderboard();
+async function init() {
+    await loadMetaData();
+    await loadLeaderboard();
 
-setInterval(loadLeaderboard, 8000);
+    setInterval(loadLeaderboard, 8000);
+}
 
+init();
 </script>
 
 </body>
