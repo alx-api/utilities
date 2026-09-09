@@ -26,7 +26,9 @@ function createRow(team, index){
             : "";
     const flagged = team.flagged || false;
     const highlighted = team.highlighted ? "highlighted": "";
-    const pending = (map_count - team.map_count) == 1;
+    console.log("map_count",map_count);
+    console.log("team.maps",team.maps);
+    const pending = (map_count - team.maps) == 1;
     // console.log("team.team:",team.team);
     const teamName = getFirstName(team.team || team.team_name);
 
@@ -48,7 +50,7 @@ function createRow(team, index){
 
             <div class="stats">
                 <div class="points ${wiped}">
-                    ${pending ? `<svg class="pending"><use href="./icons/icons.svg#spinner"></use></svg>`:""}
+                    ${pending?`<svg class="pending"><use href="./icons/icons.svg#spinner"></use></svg>`:""}
                     ${Number(team.points).toFixed(2)}
                 </div>
 

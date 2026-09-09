@@ -99,7 +99,7 @@ async function loadLeaderboard() {
           return {
             rank: team.rank,
 
-            maps: team.map_count || map_count,
+            maps: team.map_count,
 
             team: (provider === "ig" || provider === "lo")
                     ? `${team.players[0].name} ${team.team_name}`
