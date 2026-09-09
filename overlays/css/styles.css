@@ -424,6 +424,7 @@ body::before{
 }
 
 .points{
+    position: relative;
     color:var(--gold);
 
     font-size:24px;
@@ -487,4 +488,17 @@ body::before{
   fill: currentColor;
 
   vertical-align: top;
+}
+
+.pending {
+  position: absolute;
+
+  width: 14px;
+  height: 14px;
+
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  fill: var(--text-soft);
 }
