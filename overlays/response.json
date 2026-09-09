@@ -1,0 +1,1366 @@
+{
+    "event_name": "PLAY IN",
+    "lobbyCount": 1,
+    "map_number": 1,
+    "standings": [
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 1,
+            "map_count": 1,
+            "team_name": "Kaadxzu",
+            "final_score": 28,
+            "total_kills": 14,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Kaadxzu",
+                    "kills": 0
+                },
+                {
+                    "name": "Kirikou",
+                    "kills": 0
+                },
+                {
+                    "name": "VdatY",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                1
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 2,
+            "map_count": 1,
+            "team_name": "Natedogg",
+            "final_score": 18,
+            "total_kills": 10,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Natedogg",
+                    "kills": 0
+                },
+                {
+                    "name": "Newbz",
+                    "kills": 0
+                },
+                {
+                    "name": "Trik",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                2
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 3,
+            "map_count": 1,
+            "team_name": "Jackal",
+            "final_score": 16.2,
+            "total_kills": 9,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Jackal",
+                    "kills": 0
+                },
+                {
+                    "name": "Devo",
+                    "kills": 0
+                },
+                {
+                    "name": "HusKerrs",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                2
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 4,
+            "map_count": 1,
+            "team_name": "Deus Amir ",
+            "final_score": 19.8,
+            "total_kills": 11,
+            "flagged": true,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Deus Amir ",
+                    "kills": 0
+                },
+                {
+                    "name": "Criminal God",
+                    "kills": 0
+                },
+                {
+                    "name": "zDark",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                3
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 5,
+            "map_count": 1,
+            "team_name": "Zachar",
+            "final_score": 16.2,
+            "total_kills": 9,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Zachar",
+                    "kills": 0
+                },
+                {
+                    "name": "Papryczka",
+                    "kills": 0
+                },
+                {
+                    "name": "Rocket",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                5
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 6,
+            "map_count": 1,
+            "team_name": "Swiizn",
+            "final_score": 20.8,
+            "total_kills": 13,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Swiizn",
+                    "kills": 0
+                },
+                {
+                    "name": "HalloW",
+                    "kills": 0
+                },
+                {
+                    "name": "kingchawk",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                6
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 7,
+            "map_count": 1,
+            "team_name": "Dongy",
+            "final_score": 25.6,
+            "total_kills": 16,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Dongy",
+                    "kills": 0
+                },
+                {
+                    "name": "Hisoka",
+                    "kills": 0
+                },
+                {
+                    "name": "Biffle",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                7
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 8,
+            "map_count": 1,
+            "team_name": "Colony2k",
+            "final_score": 11.200000000000001,
+            "total_kills": 7,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Colony2k",
+                    "kills": 0
+                },
+                {
+                    "name": "WatchWaldo",
+                    "kills": 0
+                },
+                {
+                    "name": "Clowhn",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                8
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 9,
+            "map_count": 1,
+            "team_name": "elolam",
+            "final_score": 22.400000000000002,
+            "total_kills": 14,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "elolam",
+                    "kills": 0
+                },
+                {
+                    "name": "Sossa",
+                    "kills": 0
+                },
+                {
+                    "name": "LAWLET",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                8
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 10,
+            "map_count": 1,
+            "team_name": "grimey",
+            "final_score": 25.6,
+            "total_kills": 16,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "grimey",
+                    "kills": 0
+                },
+                {
+                    "name": "Gabe",
+                    "kills": 0
+                },
+                {
+                    "name": "adriann",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                9
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 11,
+            "map_count": 1,
+            "team_name": "Gromalok",
+            "final_score": 11.200000000000001,
+            "total_kills": 7,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Gromalok",
+                    "kills": 0
+                },
+                {
+                    "name": "Enkeo",
+                    "kills": 0
+                },
+                {
+                    "name": "Niasen",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                10
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 12,
+            "map_count": 1,
+            "team_name": "anziety",
+            "final_score": 16.799999999999997,
+            "total_kills": 12,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "anziety",
+                    "kills": 0
+                },
+                {
+                    "name": "Cythe",
+                    "kills": 0
+                },
+                {
+                    "name": "Bigman",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                11
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 13,
+            "map_count": 1,
+            "team_name": "BuLieVe",
+            "final_score": 19.599999999999998,
+            "total_kills": 14,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "BuLieVe",
+                    "kills": 0
+                },
+                {
+                    "name": "praise",
+                    "kills": 0
+                },
+                {
+                    "name": "Jayvela",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                12
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 14,
+            "map_count": 1,
+            "team_name": "OakBoi",
+            "final_score": 21,
+            "total_kills": 15,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "OakBoi",
+                    "kills": 0
+                },
+                {
+                    "name": "Twitty",
+                    "kills": 0
+                },
+                {
+                    "name": "Blingcjay",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                14
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 15,
+            "map_count": 1,
+            "team_name": "Freddy",
+            "final_score": 11.2,
+            "total_kills": 8,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Freddy",
+                    "kills": 0
+                },
+                {
+                    "name": "Kibeyz",
+                    "kills": 0
+                },
+                {
+                    "name": "savyultras90",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                15
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 16,
+            "map_count": 1,
+            "team_name": "team",
+            "final_score": 11.2,
+            "total_kills": 8,
+            "flagged": false,
+            "highlighted": false,
+            "players": [],
+            "placements": [
+                15
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 17,
+            "map_count": 1,
+            "team_name": "Trickzyvibez",
+            "final_score": 18.2,
+            "total_kills": 13,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Trickzyvibez",
+                    "kills": 0
+                },
+                {
+                    "name": "Villain",
+                    "kills": 0
+                },
+                {
+                    "name": "foohls",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                16
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 18,
+            "map_count": 1,
+            "team_name": "iVisionSR",
+            "final_score": 8.399999999999999,
+            "total_kills": 6,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "iVisionSR",
+                    "kills": 0
+                },
+                {
+                    "name": "KINGAJ",
+                    "kills": 0
+                },
+                {
+                    "name": "ShowStoppxr",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                17
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 19,
+            "map_count": 1,
+            "team_name": "Destroy",
+            "final_score": 12.6,
+            "total_kills": 9,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Destroy",
+                    "kills": 0
+                },
+                {
+                    "name": "Rxul",
+                    "kills": 0
+                },
+                {
+                    "name": "etcthomas",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                18
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 20,
+            "map_count": 1,
+            "team_name": "Fuzzn",
+            "final_score": 7,
+            "total_kills": 5,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Fuzzn",
+                    "kills": 0
+                },
+                {
+                    "name": "Conall",
+                    "kills": 0
+                },
+                {
+                    "name": "harley [S]",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                19
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 21,
+            "map_count": 1,
+            "team_name": "Bray",
+            "final_score": 9.799999999999999,
+            "total_kills": 7,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Bray",
+                    "kills": 0
+                },
+                {
+                    "name": "awbz",
+                    "kills": 0
+                },
+                {
+                    "name": "Lymax",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                20
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 22,
+            "map_count": 1,
+            "team_name": "FLS",
+            "final_score": 10.799999999999999,
+            "total_kills": 9,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "FLS",
+                    "kills": 0
+                },
+                {
+                    "name": "Melvn",
+                    "kills": 0
+                },
+                {
+                    "name": "Lenun",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                21
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 23,
+            "map_count": 1,
+            "team_name": "Skullface",
+            "final_score": 2.4,
+            "total_kills": 2,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Skullface",
+                    "kills": 0
+                },
+                {
+                    "name": "Sage",
+                    "kills": 0
+                },
+                {
+                    "name": "bbreadman",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                22
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 24,
+            "map_count": 1,
+            "team_name": "Netodz",
+            "final_score": 9.6,
+            "total_kills": 8,
+            "flagged": true,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Netodz",
+                    "kills": 0
+                },
+                {
+                    "name": "Xtraj ",
+                    "kills": 0
+                },
+                {
+                    "name": "TeKiller ",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                23
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 25,
+            "map_count": 1,
+            "team_name": "Tappa",
+            "final_score": 8.4,
+            "total_kills": 7,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Tappa",
+                    "kills": 0
+                },
+                {
+                    "name": "skully",
+                    "kills": 0
+                },
+                {
+                    "name": "Locksteel",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                24
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 26,
+            "map_count": 1,
+            "team_name": "GhostAndr3",
+            "final_score": 1.2,
+            "total_kills": 1,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "GhostAndr3",
+                    "kills": 0
+                },
+                {
+                    "name": "OrLanD",
+                    "kills": 0
+                },
+                {
+                    "name": "Predax",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                25
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 27,
+            "map_count": 1,
+            "team_name": "xResolve",
+            "final_score": 8.4,
+            "total_kills": 7,
+            "flagged": true,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "xResolve",
+                    "kills": 0
+                },
+                {
+                    "name": "GoatClamp",
+                    "kills": 0
+                },
+                {
+                    "name": "slifer",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                26
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 28,
+            "map_count": 1,
+            "team_name": "Waartex",
+            "final_score": 10.799999999999999,
+            "total_kills": 9,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Waartex",
+                    "kills": 0
+                },
+                {
+                    "name": "Fedee",
+                    "kills": 0
+                },
+                {
+                    "name": "BBlade",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                27
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 29,
+            "map_count": 1,
+            "team_name": "Predkt",
+            "final_score": 4.8,
+            "total_kills": 4,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Predkt",
+                    "kills": 0
+                },
+                {
+                    "name": "WarsZ",
+                    "kills": 0
+                },
+                {
+                    "name": "Lohqo [S]",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                28
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 30,
+            "map_count": 1,
+            "team_name": "Almond",
+            "final_score": 13.2,
+            "total_kills": 11,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Almond",
+                    "kills": 0
+                },
+                {
+                    "name": "Blazt",
+                    "kills": 0
+                },
+                {
+                    "name": "Shifty",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                29
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 31,
+            "map_count": 1,
+            "team_name": "LouiCM",
+            "final_score": 1.2,
+            "total_kills": 1,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "LouiCM",
+                    "kills": 0
+                },
+                {
+                    "name": "havoc",
+                    "kills": 0
+                },
+                {
+                    "name": "Jukeyz ",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                30
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 32,
+            "map_count": 1,
+            "team_name": "Javiix",
+            "final_score": 3.5999999999999996,
+            "total_kills": 3,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Javiix",
+                    "kills": 0
+                },
+                {
+                    "name": "zChicho",
+                    "kills": 0
+                },
+                {
+                    "name": "CamZ",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                31
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 33,
+            "map_count": 1,
+            "team_name": "BGod",
+            "final_score": 3.5999999999999996,
+            "total_kills": 3,
+            "flagged": true,
+            "highlighted": true,
+            "players": [
+                {
+                    "name": "BGod",
+                    "kills": 0
+                },
+                {
+                    "name": "Disgrazze",
+                    "kills": 0
+                },
+                {
+                    "name": "MirreyTv",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                31
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 34,
+            "map_count": 1,
+            "team_name": "Adalie",
+            "final_score": 8.4,
+            "total_kills": 7,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Adalie",
+                    "kills": 0
+                },
+                {
+                    "name": "cronuca",
+                    "kills": 0
+                },
+                {
+                    "name": "bani",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                32
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 35,
+            "map_count": 1,
+            "team_name": "stukex",
+            "final_score": 4.8,
+            "total_kills": 4,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "stukex",
+                    "kills": 0
+                },
+                {
+                    "name": "Slappy",
+                    "kills": 0
+                },
+                {
+                    "name": "Layze",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                33
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 36,
+            "map_count": 1,
+            "team_name": "Mxrkus",
+            "final_score": 1.2,
+            "total_kills": 1,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Mxrkus",
+                    "kills": 0
+                },
+                {
+                    "name": "Jstn",
+                    "kills": 0
+                },
+                {
+                    "name": "Clumsy",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                34
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 37,
+            "map_count": 1,
+            "team_name": "Braalik",
+            "final_score": 3.5999999999999996,
+            "total_kills": 3,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Braalik",
+                    "kills": 0
+                },
+                {
+                    "name": "prospect",
+                    "kills": 0
+                },
+                {
+                    "name": "Unrational",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                35
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 38,
+            "map_count": 1,
+            "team_name": "MarcoElSancho",
+            "final_score": 2,
+            "total_kills": 2,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "MarcoElSancho",
+                    "kills": 0
+                },
+                {
+                    "name": "Ous",
+                    "kills": 0
+                },
+                {
+                    "name": "Willy",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                36
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 39,
+            "map_count": 1,
+            "team_name": "Sariel",
+            "final_score": 2,
+            "total_kills": 2,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Sariel",
+                    "kills": 0
+                },
+                {
+                    "name": "ZaaKK7",
+                    "kills": 0
+                },
+                {
+                    "name": "Coodly",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                37
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 40,
+            "map_count": 1,
+            "team_name": "Zepti",
+            "final_score": 2,
+            "total_kills": 2,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Zepti",
+                    "kills": 0
+                },
+                {
+                    "name": "Hixerz",
+                    "kills": 0
+                },
+                {
+                    "name": "inno",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                37
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 41,
+            "map_count": 1,
+            "team_name": "iheedz",
+            "final_score": 3,
+            "total_kills": 3,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "iheedz",
+                    "kills": 0
+                },
+                {
+                    "name": "Dragan",
+                    "kills": 0
+                },
+                {
+                    "name": "Sean",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                38
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 42,
+            "map_count": 1,
+            "team_name": "Braxtvn",
+            "final_score": 6,
+            "total_kills": 6,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Braxtvn",
+                    "kills": 0
+                },
+                {
+                    "name": "ScummN ",
+                    "kills": 0
+                },
+                {
+                    "name": "intechs",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                40
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 43,
+            "map_count": 1,
+            "team_name": "Aydan",
+            "final_score": 3,
+            "total_kills": 3,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Aydan",
+                    "kills": 0
+                },
+                {
+                    "name": "Scopez",
+                    "kills": 0
+                },
+                {
+                    "name": "Fifakill",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                41
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 44,
+            "map_count": 1,
+            "team_name": "Tokzy",
+            "final_score": 0,
+            "total_kills": 0,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Tokzy",
+                    "kills": 0
+                },
+                {
+                    "name": "TayZen",
+                    "kills": 0
+                },
+                {
+                    "name": "fikzy",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                42
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 45,
+            "map_count": 1,
+            "team_name": "BubbleCT",
+            "final_score": 1,
+            "total_kills": 1,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "BubbleCT",
+                    "kills": 0
+                },
+                {
+                    "name": "OEKIY",
+                    "kills": 0
+                },
+                {
+                    "name": "Deshi",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                43
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 46,
+            "map_count": 1,
+            "team_name": "Echo",
+            "final_score": 1,
+            "total_kills": 1,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Echo",
+                    "kills": 0
+                },
+                {
+                    "name": "Spam",
+                    "kills": 0
+                },
+                {
+                    "name": "Disrrpt",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                44
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 47,
+            "map_count": 1,
+            "team_name": "StableJay",
+            "final_score": 0,
+            "total_kills": 0,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "StableJay",
+                    "kills": 0
+                },
+                {
+                    "name": "Rumblexl",
+                    "kills": 0
+                },
+                {
+                    "name": "Tapvlator",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                45
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": 48,
+            "map_count": 1,
+            "team_name": "Reflame",
+            "final_score": 0,
+            "total_kills": 0,
+            "flagged": true,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Reflame",
+                    "kills": 0
+                },
+                {
+                    "name": "iZund",
+                    "kills": 0
+                },
+                {
+                    "name": "Castillo",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                46
+            ],
+            "scores": []
+        },
+        {
+            "lobbyLabel": "PLAY IN",
+            "rank": null,
+            "map_count": 1,
+            "team_name": "Teemey",
+            "final_score": null,
+            "total_kills": 0,
+            "flagged": false,
+            "highlighted": false,
+            "players": [
+                {
+                    "name": "Teemey",
+                    "kills": 0
+                },
+                {
+                    "name": "zai_eu",
+                    "kills": 0
+                },
+                {
+                    "name": "Qawada",
+                    "kills": 0
+                }
+            ],
+            "placements": [
+                null
+            ],
+            "scores": []
+        }
+    ]
+}

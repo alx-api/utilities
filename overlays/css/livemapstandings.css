@@ -1,0 +1,122 @@
+﻿:root {
+  --overlay-width: 395px;
+  --row-height: 42px;
+  --visible-rows: 12;
+  --accent: #f6c344;
+  --panel: rgba(10, 13, 20, 0.94);
+  --row: rgba(28, 33, 45, 0.96);
+  --row-alt: rgba(20, 25, 36, 0.96);
+  --text: #f8fafc;
+  --muted: #7f8796;
+}
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  width: var(--overlay-width);
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.standings {
+  width: var(--overlay-width);
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--panel);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.32);
+}
+
+.standings__header,
+.standings__row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 42px 72px 54px;
+  align-items: center;
+  text-align: center;
+}
+
+.standings__header {
+  height: 31px;
+  padding: 0 6px;
+  border-bottom: 2px solid var(--accent);
+  background: #111621;
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.standings__viewport {
+  position: relative;
+  height: calc(var(--visible-rows) * var(--row-height));
+  overflow: hidden;
+  transition: opacity 360ms ease;
+}
+
+.standings__viewport.is-fading { opacity: 0; }
+
+.standings__track {
+  transform: translateY(0);
+}
+
+.standings__row {
+  height: var(--row-height);
+  padding: 0 6px;
+  background: var(--row);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.standings__row:nth-child(even) { background: var(--row-alt); }
+
+.standings__row > span { min-width: 0; }
+
+.standings__team {
+  overflow: hidden;
+  padding: 0 7px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.standings__rank {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.standings__kills,
+.standings__placement { font-variant-numeric: tabular-nums; }
+.standings__points { font-variant-numeric: tabular-nums; }
+
+.standings__row.is-placed {
+  color: var(--muted);
+  filter: saturate(0.35);
+}
+
+.standings__row.is-placed .standings__rank { color: #727987; }
+
+.standings__message {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 20px;
+  color: #aeb6c5;
+  font-size: 13px;
+  text-align: center;
+}
+
+.standings__message[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .standings__viewport { transition-duration: 1ms; }
+}
+
+
+

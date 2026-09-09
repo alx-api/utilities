@@ -1,0 +1,28 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Map Standings</title>
+    <link rel="stylesheet" href="./css/livemapstandings.css" />
+  </head>
+  <body>
+    <main class="standings" aria-label="Live map standings">
+      <div class="standings__header" role="row">
+        <span role="columnheader">Rank</span>
+        <span role="columnheader">Team</span>
+        <span role="columnheader">Kills</span>
+        <span role="columnheader">Placement</span>
+        <span role="columnheader">Points</span>
+      </div>
+
+      <div class="standings__viewport" id="standings-viewport" role="table" aria-live="polite">
+        <div class="standings__track" id="standings-track" role="rowgroup"></div>
+        <p class="standings__message" id="standings-message">Loading standings…</p>
+      </div>
+    </main>
+
+    <script type="module" src="./js/livemapstandings.js"></script>
+  </body>
+</html>
+
